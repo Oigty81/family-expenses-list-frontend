@@ -1,0 +1,28 @@
+@import 'custom-icons.scss';
+@import 'custom-quasar-components.scss';
+
+html {
+    font-size: 16px;
+}
+
+body {
+    overflow: hidden;
+}
+
+.line-separator-1 {
+    border: 0.1rem solid #c0c0c0;
+    margin: 0.1rem;
+}
+
+.line-separator-2 {
+    border: 0.08rem solid #c0c0c0b0;
+    margin: 0.1rem;
+}
+
+.font-01 {
+    font-family: "Roboto", 'Courier New'; // is quasar default font 
+}
+
+.font-02 {
+    font-family: Arial, Helvetica, sans-serif;
+}
