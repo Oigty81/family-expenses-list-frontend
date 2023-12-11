@@ -56,7 +56,7 @@ const saveNewCategoryComposition = async () => {
 
 <template>
   <div class="row q-mt-md">
-    <div class="col">
+    <div class="col-6">
       <div class="q-pa-md">
         <q-select
           v-model="model"
@@ -71,11 +71,11 @@ const saveNewCategoryComposition = async () => {
         />
       </div>
     </div>
-    <div class="col">
+    <div class="col-5">
       <q-btn
         style="width: 100%"
         outline
-        class="q-pa-md q-ml-md"
+        class="q-pa-md q-ml-md q-mt-md"
         label="Add Category Composition"
         color="info"
         :disable="isModelEmpty"

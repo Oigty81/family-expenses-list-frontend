@@ -23,7 +23,7 @@ const categoryCompositionModel = ref(null);
 const info = ref("");
 
 const isSaveButtonDisable = computed(() => {
-  if(categoryCompositionModel.value === null || info.value === "" || price.numberValue.value === null) {
+  if(categoryCompositionModel.value === null || price.numberValue.value === null) {
     return true;
   } else {
     return false;
@@ -84,7 +84,7 @@ const saveNewExpenses = async () => {
       />
     </div>
   </div>
-  <div class="row q-mx-md">
+  <div class="row q-mt-md q-mx-md">
     <div class="col-md-2 col-12">
       <p>Info:</p>
     </div>
@@ -99,7 +99,7 @@ const saveNewExpenses = async () => {
       />
     </div>
   </div>
-  <div class="row q-mx-md">
+  <div class="row q-mt-md q-mx-md">
     <div class="col-md-5 col-12">
       <q-btn
         style="width: 100%"

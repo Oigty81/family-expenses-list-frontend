@@ -17,7 +17,7 @@ onMounted(() => {
   toDate.value = moment().add(5, 'days').format('DD.MM.YYYY');
 });
 
-const onSearch = async () => {  
+const onSearch = async () => {
   await expensesStore.fetchExpensesPeriod(convertDateFromDeToUs(fromDate.value), convertDateFromDeToUs(toDate.value));
 };
 
