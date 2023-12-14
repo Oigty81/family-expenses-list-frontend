@@ -17,7 +17,7 @@ export const useUtilitiesStore = defineStore('utilitiesStore', () => {
     const loadBatterystate = () => {
         axios({
             method: 'get',
-            url: import.meta.env.VITE_LOCAL_REQUEST_BASE + '/utility/batterystate'
+            url: import.meta.env.VITE_LOCAL_REQUEST_BASE + '/utilities/batterystate'
         })
         .then((response) => {
             const data = JSON.parse(response.data);
@@ -31,14 +31,14 @@ export const useUtilitiesStore = defineStore('utilitiesStore', () => {
     const appMinimize = () => {
         axios({
             method: 'get',
-            url: import.meta.env.VITE_LOCAL_REQUEST_BASE + '/utility/minimize'
+            url: import.meta.env.VITE_LOCAL_REQUEST_BASE + '/utilities/minimize'
         });
       };
     
       const appQuit = () => {
           axios({
               method: 'get',
-              url: import.meta.env.VITE_LOCAL_REQUEST_BASE + '/utility/quit'
+              url: import.meta.env.VITE_LOCAL_REQUEST_BASE + '/utilities/quit'
           });
       };
 

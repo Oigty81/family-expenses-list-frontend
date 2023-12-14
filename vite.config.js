@@ -21,6 +21,9 @@ export default ({ mode }) => {
       };
 
   return defineConfig({
+    build: {
+      emptyOutDir: true,
+    },
     define: {
       'process.env': {}   // set fake for process.env object in vite-env
     },
