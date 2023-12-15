@@ -113,12 +113,12 @@ const clickLogout = async () => {
         <q-btn
           class="q-ma-xs"
           icon="fa-solid fa-window-minimize"
-          @click="console.log('Minimize App');"
+          @click="utilitiesStore.appMinimize()"
         />
         <q-btn
           class="q-ma-xs"
           icon="fa-solid fa-power-off"
-          @click="console.log('Close App');"
+          @click="utilitiesStore.appQuit()"
         />
       </q-toolbar>
     </q-header>
