@@ -15,7 +15,7 @@ link to the associated backend project [click here](https://github.com/Oigty81/f
 #
 ### todo
 
-- [ ] add filter category filter option for show expenses
+- [ ] add category filter option for show expenses
 - [ ] add a PDF-Export feature
 - [ ] add language support
 
