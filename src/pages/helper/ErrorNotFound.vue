@@ -1,3 +1,10 @@
+<script setup>
+import { ref} from 'vue';
+
+const title = ref(import.meta.env.VITE_LOCAL_ERROR_PAGE_TITLE);
+
+</script>
+
 <template>
   <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
     <div>
@@ -8,7 +15,7 @@
         class="text-h2"
         style="opacity:.4"
       >
-        ..... SPA Route .....
+        ..... {{ title }} (SPA Route) .....
       </div>
       <div
         class="text-h3"
