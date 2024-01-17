@@ -22,6 +22,7 @@ const { getDarkModeState } = storeToRefs(uiStore);
 const leftDrawerOpen = ref(false);
 const isDesktopBreakPoint = ref(false);
 const showTopMenuButton = ref(false);
+const footerEnabled = ref(import.meta.env.VITE_LOCAL_FOOTER_ENABLED.toLowerCase() === "true" ? true : false);
 
 const toggleLeftDrawer = () => {
         leftDrawerOpen.value = !leftDrawerOpen.value;
@@ -208,6 +209,7 @@ const clickLogout = async () => {
     </q-page-container>
   
     <q-footer
+      v-if="footerEnabled"
       elevated
       class="bg-grey-8 text-white"
       style="height:28px;"
