@@ -9,18 +9,11 @@ import { useCategoriesStore } from '@/stores/categories.js';
 export const useExpensesStore = defineStore('expensesStore', () => {
 
     const categoriesStore  = useCategoriesStore();
-    
-    // -------------------
 
-    const expensesPeriod = ref([]);
-    const isFetchExpensesPeriod = ref(false);
+    const expensesData = ref([]);
+    const isFetchExpenses = ref(false);
 
-    // -------------------
-
-    const getExpensesPeriod = computed(() => expensesPeriod.value);
-    const getIsFetchExpensesPeriod = computed(() => isFetchExpensesPeriod.value);
-
-    const getExpensesPeriodForTableView = computed(() => {
+    const expensesForTableView = computed(() => {
         if( expensesPeriod.value.length > 0 &&
             categoriesStore.getCategoriesData.categoryCompositionsData !== undefined &&
             categoriesStore.getCategoriesData.categoryCompositionsData.length > 0) {
@@ -48,7 +41,7 @@ export const useExpensesStore = defineStore('expensesStore', () => {
         }
     });
 
-    const getExpensesPeriodTotal = computed(() => {
+    const expensesTotal = computed(() => {
         if( expensesPeriod.value.length > 0 &&
             categoriesStore.getCategoriesData.categoryCompositionsData !== undefined &&
             categoriesStore.getCategoriesData.categoryCompositionsData.length > 0) {
@@ -63,19 +56,18 @@ export const useExpensesStore = defineStore('expensesStore', () => {
        
     });
 
-    // -------------------
-
-    const fetchExpensesPeriod = async (from, to ) => {
+    const fetchExpenses = async (filters) => {
         return new Promise((resolve, reject) => {
-            isFetchExpensesPeriod.value = true;
-            ajaxRequestAuthWithParams("/expenses/getExpensesPeriod", "GET", { from: from, to: to })
+            isFetchExpenses.value = true;
+            ajaxRequestAuthWithParams("/expenses/getExpenses", "GET", filters)
             .then((response) => {
-                isFetchExpensesPeriod.value = false;
-                expensesPeriod.value = response.data;
+                isFetchExpenses.value = false;
+                expensesData.value = response.data;
                 resolve();
             })
             .catch((err)=> {
-                isFetchExpensesPeriod.value = false;
+                isFetchExpenses.value = false;
+                expensesData.value = [];
                 reject(err);
             });
         });
@@ -93,12 +85,9 @@ export const useExpensesStore = defineStore('expensesStore', () => {
         });
     };
 
-    // -------------------
-
     return {
-        getExpensesPeriod, getIsFetchExpensesPeriod, getExpensesPeriodForTableView, getExpensesPeriodTotal,
-        
-        fetchExpensesPeriod, putExpenses
+        expensesData, isFetchExpenses, expensesForTableView, expensesTotal,
+        fetchExpenses, putExpenses
     };
 });
 
