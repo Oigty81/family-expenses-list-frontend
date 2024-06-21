@@ -81,10 +81,6 @@ export const useExpensesStore = defineStore('expensesStore', () => {
         });
     };
 
-    const clearExpensesPeriod = async () => {
-        expensesPeriod.value = [];
-    };
-
     const putExpenses = async (categoryCompositionId, price, metatext) => {
         return new Promise((resolve, reject) => {
             ajaxRequestAuthWithData("/expenses/putExpenses", 'POST', { categoryCompositionId: categoryCompositionId, price: price, metatext: metatext })
@@ -102,7 +98,7 @@ export const useExpensesStore = defineStore('expensesStore', () => {
     return {
         getExpensesPeriod, getIsFetchExpensesPeriod, getExpensesPeriodForTableView, getExpensesPeriodTotal,
         
-        fetchExpensesPeriod, clearExpensesPeriod, putExpenses
+        fetchExpensesPeriod, putExpenses
     };
 });
 

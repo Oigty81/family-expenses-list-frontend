@@ -6,7 +6,6 @@ import EditCategoryComposition from '@pages/EditCategoryComposition.vue';
 import LoginMask from '@pages/LoginMask.vue';
 
 import { useUserStore } from '@stores/user.js';
-import { useExpensesStore  } from '@/stores/expenses.js';
 
 // -----------------------------------------------
 
@@ -15,9 +14,6 @@ const routes =[
     path: '/',
     name: 'ExpensesViewPage',
     component: ExpensesViewPage,
-    beforeEnter: () => {
-      useExpensesStore().clearExpensesPeriod();
-    }
   },
   {
     path: '/edit-category',
