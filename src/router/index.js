@@ -1,9 +1,9 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 
+import ExpensesViewPage from '@pages/ExpensesViewPage.vue';
 import EditCategory from '@pages/EditCategory.vue';
 import EditCategoryComposition from '@pages/EditCategoryComposition.vue';
 import AddExpenses from '@pages/AddExpenses.vue';
-import ViewExpensesSimple from '@pages/ViewExpensesSimple.vue';
 import LoginMask from '@pages/LoginMask.vue';
 
 import { useUserStore } from '@stores/user.js';
@@ -14,8 +14,8 @@ import { useExpensesStore  } from '@/stores/expenses.js';
 const routes =[
   {
     path: '/',
-    name: 'ViewExpensesSimple',
-    component: ViewExpensesSimple,
+    name: 'ExpensesViewPage',
+    component: ExpensesViewPage,
     beforeEnter: () => {
       useExpensesStore().clearExpensesPeriod();
     }
