@@ -2,8 +2,8 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import router from './router';
 
-import { Quasar } from 'quasar';
-import quasarUserOptions from './quasar-user-options';
+import { Quasar, Notify, Dialog, Loading } from 'quasar';
+import lang from 'quasar/lang/de.js';
 
 import { useLanguageStore } from '@/stores/language.js';
 
@@ -32,7 +32,14 @@ const app = createApp(App);
 
 app.use(store);
 app.use(router);
-app.use(Quasar, quasarUserOptions);
+app.use(Quasar, {
+    plugins: {
+        Notify,
+        Dialog,
+        Loading
+    },
+    lang: lang
+});
 
 // -----
 
