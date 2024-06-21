@@ -3,7 +3,6 @@ import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router
 import ExpensesViewPage from '@pages/ExpensesViewPage.vue';
 import EditCategory from '@pages/EditCategory.vue';
 import EditCategoryComposition from '@pages/EditCategoryComposition.vue';
-import AddExpenses from '@pages/AddExpenses.vue';
 import LoginMask from '@pages/LoginMask.vue';
 
 import { useUserStore } from '@stores/user.js';
@@ -29,11 +28,6 @@ const routes =[
     path: '/edit-category-composition',
     name: 'EditCategoryComposition',
     component: EditCategoryComposition,
-  },
-  {
-    path: '/add-expenses',
-    name: 'AddExpenses',
-    component: AddExpenses,
   },
   {
     path: '/login',
