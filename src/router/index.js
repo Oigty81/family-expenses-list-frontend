@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 
-import MainDashboard from '@pages/MainDashboard.vue';
 import EditCategory from '@pages/EditCategory.vue';
 import EditCategoryComposition from '@pages/EditCategoryComposition.vue';
 import AddExpenses from '@pages/AddExpenses.vue';
@@ -15,9 +14,11 @@ import { useExpensesStore  } from '@/stores/expenses.js';
 const routes =[
   {
     path: '/',
-    name: 'MainDashboard',
-    component: MainDashboard,
-    alias: '/dashboard',
+    name: 'ViewExpensesSimple',
+    component: ViewExpensesSimple,
+    beforeEnter: () => {
+      useExpensesStore().clearExpensesPeriod();
+    }
   },
   {
     path: '/edit-category',
@@ -33,14 +34,6 @@ const routes =[
     path: '/add-expenses',
     name: 'AddExpenses',
     component: AddExpenses,
-  },
-  {
-    path: '/view-expenses-simple',
-    name: 'ViewExpensesSimple',
-    component: ViewExpensesSimple,
-    beforeEnter: () => {
-      useExpensesStore().clearExpensesPeriod();
-    }
   },
   {
     path: '/login',

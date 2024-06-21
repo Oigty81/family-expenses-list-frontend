@@ -145,7 +145,7 @@ const clickLogout = async () => {
           to="/"
         >
           <q-item-section>
-            <q-item-label>Dashboard</q-item-label>
+            <q-item-label>Show Expenses</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -179,17 +179,6 @@ const clickLogout = async () => {
         >
           <q-item-section>
             <q-item-label>Add Expenses</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item
-          v-ripple
-          clickable
-          active-class="bg-grey-4 text-blue-12"
-          to="/view-expenses-simple"
-        >
-          <q-item-section>
-            <q-item-label>Show Expenses (Time-Period)</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
