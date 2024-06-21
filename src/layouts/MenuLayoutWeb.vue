@@ -2,8 +2,6 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { storeToRefs } from 'pinia';
-
 import { useUiStore } from '@/stores/ui.js';
 import { useLanguageStore } from '@/stores/language.js';
 import { useUserStore } from '@/stores/user.js';
@@ -14,8 +12,6 @@ const router = useRouter();
 const uiStore = useUiStore();
 const languageStore  = useLanguageStore();
 const userStore = useUserStore();
-
-const { getDarkModeState } = storeToRefs(uiStore);
 
 const leftDrawerOpen = ref(false);
 const isDesktopBreakPoint = ref(false);
@@ -170,30 +166,10 @@ const clickLogout = async () => {
     <q-page-container
       id="main-content-el"
       style="overflow-x: hidden; overflow-y: auto;"
-      :style="{'max-height': uiStore.getHeightContent + 'px'}"
+      :style="{'max-height': uiStore.heightContent + 'px'}"
     >
       <router-view />
       <q-resize-observer @resize="onResize" />
     </q-page-container>
-  
-    <q-footer
-      v-if="footerEnabled"
-      elevated
-      class="bg-grey-8 text-white"
-      style="height:28px;"
-    >
-      <q-toolbar>
-        <q-space />
-        <q-toggle
-          v-model="getDarkModeState"
-          class="q-ml-xs text-red-1"
-          :color="uiStore.getDarkModeProps.color"
-          :label="uiStore.getDarkModeProps.text"
-          keep-color
-          size="xs"
-          style="margin-bottom: 20px;"
-        />
-      </q-toolbar>
-    </q-footer>
   </q-layout>
 </template>

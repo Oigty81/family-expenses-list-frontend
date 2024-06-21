@@ -13,17 +13,13 @@ const utilitiesStore = useUtilitiesStore();
 
 userStore.setUserIsAuthenticatedWhenTokenIsAvailableAndValid();
 
-useUiStore().setDarkmode(false);
-useUiStore().setViewportHeight(window.innerHeight);
-
-
-
-
-let MenuLayout = null;
+uiStore.heightViewport = window.innerHeight;
 
 addEventListener("resize", () => {
-  useUiStore().setViewportHeight(window.innerHeight);
+  uiStore.heightViewport = window.innerHeight;
 });
+
+let MenuLayout = null;
 
 if(import.meta.env.VITE_LOCAL_USE_FOR === null || import.meta.env.VITE_LOCAL_USE_FOR === undefined) {
   MenuLayout = MenuLayoutError;
