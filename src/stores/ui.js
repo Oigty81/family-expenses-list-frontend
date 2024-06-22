@@ -7,7 +7,7 @@ export const useUiStore = defineStore('uiStore', () => {
     const heightHeader = ref(56);
 
     const heightContent = computed(() => {
-        return heightViewport.value - heightHeaderAdmin.value  + 40;
+        return heightViewport.value - heightHeader.value  + 40;
     });
 
     const heightExpensesList = computed(() => {
