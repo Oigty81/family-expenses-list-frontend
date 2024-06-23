@@ -84,9 +84,33 @@ export const useExpensesStore = defineStore('expensesStore', () => {
         });
     };
 
+    const updateExpenses = async (id, data) => {
+        return new Promise((resolve, reject) => {
+            ajaxRequestAuthWithData("/expenses/updateExpenses", 'POST', { id: id, data: data })
+            .then(() => {
+                resolve();
+            })
+            .catch((err) => {
+                reject(err);
+            });
+        });
+    };
+
+    const deleteExpenses = async (id) => {
+        return new Promise((resolve, reject) => {
+            ajaxRequestAuthWithData("/expenses/deleteExpenses", 'POST', { id: id })
+            .then(() => {
+                resolve();
+            })
+            .catch((err) => {
+                reject(err);
+            });
+        });
+    };
+
     return {
         expensesData, isFetchExpenses, expensesForTableView, expensesTotal,
-        fetchExpenses, putExpenses
+        fetchExpenses, putExpenses, updateExpenses, deleteExpenses
     };
 });
 
