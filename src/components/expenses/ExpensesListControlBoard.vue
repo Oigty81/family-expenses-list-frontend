@@ -38,7 +38,7 @@ watch(categoriesModel, () => {
     if(categoriesModel.value.length > 0) {
       let categoriesFilter = [];
       categoriesModel.value.forEach(e => {
-        usersFilter.push(e.id);
+        categoriesFilter.push(e.id);
      });
      filterOptions.value.categoriesFilter = categoriesFilter;
     } else {
