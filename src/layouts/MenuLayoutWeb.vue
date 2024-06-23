@@ -52,6 +52,14 @@ const clickLogout = async () => {
       class="bg-primary text-white"
     >
       <q-toolbar>
+        <q-btn
+          v-if="showTopMenuButton"
+          dense
+          flat
+          round
+          icon="menu"
+          @click="toggleLeftDrawer"
+        />
         <q-toolbar-title class="non-selectable">
           <q-avatar>
             <img
@@ -79,14 +87,6 @@ const clickLogout = async () => {
           icon="fa-solid fa-arrow-right-from-bracket"
           label="Logout"
           @click="clickLogout()"
-        />
-        <q-btn
-          v-if="showTopMenuButton"
-          dense
-          flat
-          round
-          icon="menu"
-          @click="toggleLeftDrawer"
         />
       </q-toolbar>
     </q-header>
