@@ -1,21 +1,24 @@
+
 import { beforeEach, describe, expect, test} from "vitest";
 
 import { createPinia, setActivePinia } from "pinia";
 
-import { useCategoriesStore  } from "@/stores/categories.js";
+import { useExpensesDataStore  } from "@stores/expensesData.js";
 
-describe('test "categoriesStore"', () => {
+
+
+describe('test "expensesDataStore"', () => {
     
-    let categoriesStore = null;
+    let expensesDataStore = null;
 
     beforeEach(() => {
         setActivePinia(createPinia());
-        categoriesStore = useCategoriesStore();
+        expensesDataStore = useExpensesDataStore();
     });
 
     test('whether initializes with correct values', () => {
         
-        expect(categoriesStore.GetCategories).toBe([]);
+        expect(expensesDataStore.expensesData).toStrictEqual([]);
         
     });
     //TODO:

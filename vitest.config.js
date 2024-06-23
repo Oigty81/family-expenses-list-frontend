@@ -25,10 +25,10 @@ export default defineConfig({
             'dist2',
 
             'tests/unit/stores/ui.spec.js',
-            //'tests/unit/stores/languageData.spec.js',
+            'tests/unit/stores/languageData.spec.js',
             'tests/unit/stores/user.spec.js',
-            'tests/unit/stores/categories.spec.js',
-            'tests/unit/stores/expenses.spec.js',
+            //'tests/unit/stores/categoriesData.spec.js',
+            //'tests/unit/stores/expensesData.spec.js',
             'tests/unit/stores/utilities.spec.js',
 
             'tests/unit/utilities/ajaxWeb.spec.js'

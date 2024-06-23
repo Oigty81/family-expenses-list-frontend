@@ -5,8 +5,8 @@ import { useQuasar } from 'quasar';
 
 import { useCurrencyInput } from "vue-currency-input";
 
-import { useCategoriesStore } from '@/stores/categories.js';
-import { useExpensesStore  } from '@/stores/expenses.js';
+import { useCategoriesDataStore } from '@/stores/categoriesData.js';
+import { useExpensesDataStore  } from '@/stores/expensesData.js';
 
 const router = useRouter();
 
@@ -14,8 +14,8 @@ const $q = useQuasar();
 
 const price = useCurrencyInput({ currency: 'EUR' });
 
-const categoriesStore  = useCategoriesStore();
-const expensesStore  = useExpensesStore();
+const categoriesDataStore  = useCategoriesDataStore();
+const expensesDatsStore  = useExpensesDataStore();
 
 const errorMessage = ref("");
 

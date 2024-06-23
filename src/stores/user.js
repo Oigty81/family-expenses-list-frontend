@@ -1,6 +1,6 @@
 
-import { useCategoriesStore } from '@/stores/categories.js';
-import { useExpensesStore  } from '@/stores/expenses.js';
+import { useCategoriesDataStore } from '@stores/categoriesData.js';
+import { useExpensesDataStore  } from '@stores/expensesData.js';
 
 import { ajaxRequestForLogin } from '@/utilities/ajax';
 
@@ -11,9 +11,8 @@ import { ref, computed } from 'vue';
 
 export const useUserStore = defineStore('userStore', () => {
 
-    const categoriesStore  = useCategoriesStore();
-    const expensesStore  = useExpensesStore();
-
+    const categoriesDataStore  = useCategoriesDataStore();
+    const expensesDataStore  = useExpensesDataStore();
 
     const isAuthenticated = ref (false);
     const userData = ref(undefined);
@@ -61,8 +60,11 @@ export const useUserStore = defineStore('userStore', () => {
     const logout = async () => {
         isAuthenticated.value = false;
         sessionStorage.removeItem('accessToken');
-        categoriesStore.clearCategories();
-        expensesStore.clearExpensesPeriod();
+        categoriesDataStore.categoriesData = {
+            categories : [],
+            categoryCompositions: []
+        };
+        expensesDataStore.expensesData = [];
     };
 
     const setUserIsAuthenticatedWhenTokenIsAvailableAndValid = async () => {

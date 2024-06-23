@@ -3,23 +3,22 @@ import { ref, computed } from 'vue';
 
 import { ajaxRequestAuthWithParams, ajaxRequestAuthWithData } from '@/utilities/ajax';
 
-import { useCategoriesStore } from '@/stores/categories.js';
+import { useCategoriesDataStore } from '@stores/categoriesData.js';
 
-export const useExpensesStore = defineStore('expensesStore', () => {
+export const useExpensesDataStore = defineStore('expensesDataStore', () => {
 
-    const categoriesStore  = useCategoriesStore();
+    const categoriesDataStore  = useCategoriesDataStore();
 
     const expensesData = ref([]);
     const isFetchExpenses = ref(false);
 
     const expensesForTableView = computed(() => {
         if( expensesPeriod.value.length > 0 &&
-            categoriesStore.getCategoriesData.categoryCompositionsData !== undefined &&
-            categoriesStore.getCategoriesData.categoryCompositionsData.length > 0) {
+            categoriesDataStore.categoriesData.categoryCompositions !== undefined &&
+            categoriesDataStore.categoriesData.categoryCompositions.length > 0) {
                 let destObject = [];
             expensesPeriod.value.forEach(e => {
-               
-                categoriesStore.getCategoriesData.categoryCompositionsData.forEach(cc => {
+                categoriesDataStore.categoriesData.categoryCompositions.forEach(cc => {
                     
                     if(e.categoryCompositionId === cc.categoryCompositionId) {
                         let categoryCompositionText = cc.categories.join(' / ');
@@ -38,21 +37,6 @@ export const useExpensesStore = defineStore('expensesStore', () => {
         } else {
             return [];
         }
-    });
-
-    const expensesTotal = computed(() => {
-        if( expensesPeriod.value.length > 0 &&
-            categoriesStore.getCategoriesData.categoryCompositionsData !== undefined &&
-            categoriesStore.getCategoriesData.categoryCompositionsData.length > 0) {
-                let total = 0;
-                expensesPeriod.value.forEach(e => {
-                    total += e.price;
-                });
-                return total;
-            } else {
-                return 0;
-            }
-       
     });
 
     const fetchExpenses = async (filters) => {
@@ -109,7 +93,7 @@ export const useExpensesStore = defineStore('expensesStore', () => {
     };
 
     return {
-        expensesData, isFetchExpenses, expensesForTableView, expensesTotal,
+        expensesData, isFetchExpenses, expensesForTableView, 
         fetchExpenses, putExpenses, updateExpenses, deleteExpenses
     };
 });

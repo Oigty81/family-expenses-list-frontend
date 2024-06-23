@@ -3,21 +3,18 @@ import { ref, computed } from 'vue';
 
 import { ajaxRequestAuthWithParams, ajaxRequestAuthWithData } from '@/utilities/ajax';
 
-export const useCategoriesStore = defineStore('categoriesStore', () => {
+export const useCategoriesDataStore = defineStore('categoriesDataStore', () => {
 
     const categoriesData = ref({
-        categoriesData : [],
-        categoryCompositionsData: []
+        categories : [],
+        categoryCompositions: []
     });
 
     const isFetchCategories = ref(false);
 
     // -------------------
 
-    const getCategoriesData = computed(() => categoriesData.value);
-    const getIsFetchCategories = computed(() => isFetchCategories.value);
-
-    const getCategoryDataForSelector = computed(()=> {
+    const categoryDataForSelector = computed(()=> {
         let cd = categoriesData.value.categoriesData;
         let destObject = [];
         if(cd !== undefined && cd.length !== 0) {
@@ -34,7 +31,7 @@ export const useCategoriesStore = defineStore('categoriesStore', () => {
        
     });
 
-    const getCategoryCompositionsDataForSelector = computed(()=> {
+    const categoryCompositionsDataForSelector = computed(()=> {
         let ccd = categoriesData.value.categoryCompositionsData;
         let destObject = [];
         if(ccd !== undefined && ccd.length !== 0) {
@@ -64,16 +61,13 @@ export const useCategoriesStore = defineStore('categoriesStore', () => {
             })
             .catch((err)=> {
                 isFetchCategories.value = false;
+                categoriesData.value = {
+                    categories : [],
+                    categoryCompositions: []
+                }
                 reject(err);
             });
         });
-    };
-
-    const clearCategories = async () => {
-        categoriesData.value = {
-            categoriesData : [],
-            categoryCompositionsData: []
-        };
     };
 
     const putCategory = async (title) => {
@@ -103,9 +97,8 @@ export const useCategoriesStore = defineStore('categoriesStore', () => {
     // -------------------
 
     return {
-        getCategoriesData, getIsFetchCategories, getCategoryDataForSelector, getCategoryCompositionsDataForSelector,
-        
-        fetchCategories, clearCategories, putCategory, putCategoryComposition
+        categoriesData, isFetchCategories, categoryDataForSelector, categoryCompositionsDataForSelector,
+        fetchCategories, putCategory, putCategoryComposition
     };
 });
 

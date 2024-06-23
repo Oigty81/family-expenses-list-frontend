@@ -4,13 +4,13 @@ import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
 
-import { useCategoriesStore } from '@/stores/categories.js';
+import { useCategoriesDataStore } from '@/stores/categoriesData.js';
 
 const router = useRouter();
 
 const $q = useQuasar();
 
-const categoriesStore  = useCategoriesStore();
+const categoriesDataStore  = useCategoriesDataStore();
 
 const errorMessage = ref("");
 const model = ref(null);
@@ -45,7 +45,7 @@ const saveNewCategoryComposition = async () => {
   errorMessage.value = "";
   
   try {
-    await categoriesStore.putCategoryComposition(getModelIds.value);
+    await categoriesDataStore.putCategoryComposition(getModelIds.value);
     await router.push("/");
   } catch(ex) {
     errorMessage.value = ex.text;
@@ -66,7 +66,7 @@ const saveNewCategoryComposition = async () => {
           use-chips
           multiple
           input-debounce="0"
-          :options="categoriesStore.getCategoryDataForSelector"
+          :options="categoriesStore.categoryDataForSelector"
           style="width: 100%"
         />
       </div>

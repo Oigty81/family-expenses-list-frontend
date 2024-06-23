@@ -3,7 +3,7 @@ import { ref, watch, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
 
-import { useCategoriesStore } from '@/stores/categories.js';
+import { useCategoriesDataStore } from '@/stores/categoriesData.js';
 
 import { characterIsLetter } from '@/utilities/text.js';
 
@@ -11,7 +11,7 @@ const router = useRouter();
 
 const $q = useQuasar();
 
-const categoriesStore  = useCategoriesStore();
+const categoriesStore  = useCategoriesDataStore();
 
 const categoryName = ref("");
 const errorMessage = ref("");
@@ -21,14 +21,14 @@ const isValidCategoryName = ref(false);
 
 onMounted( async () => {
   $q.loading.show();
-  await categoriesStore.fetchCategories();
+  await categoriesDataStore.fetchCategories();
   $q.loading.hide();
 });
 
 
 const checkCategorynameWhetherIsAlreadyAvailable = () => {
   return new Promise((resolve, reject) => {
-    categoriesStore.getCategoriesData.categoriesData.forEach(c => {
+    categoriesDataStore.categoriesData.categories.forEach(c => {
       if(c.title.toLowerCase() === categoryName.value.toLowerCase()) {
         reject({ text: "Category name is already available"});
       }
@@ -41,7 +41,7 @@ const saveNewCategory = async () => {
   errorMessage.value = "";
   try {
     await checkCategorynameWhetherIsAlreadyAvailable();
-    await categoriesStore.putCategory(categoryName.value);
+    await categoriesDataStore.putCategory(categoryName.value);
     await router.push("/");
   } catch(ex) {
     errorMessage.value = ex.text;
