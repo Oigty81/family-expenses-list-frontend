@@ -2,7 +2,6 @@ import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 
 import { ajaxRequestAuthWithParams, ajaxRequestAuthWithData } from '@/utilities/ajax';
-import { bindTextArray } from '@/utilities/text';
 
 export const useCategoriesStore = defineStore('categoriesStore', () => {
 
@@ -40,7 +39,7 @@ export const useCategoriesStore = defineStore('categoriesStore', () => {
         let destObject = [];
         if(ccd !== undefined && ccd.length !== 0) {
             ccd.forEach(cc => {
-                let categoriesText = bindTextArray(cc.categories);
+                let categoriesText = cc.categories.join(' / ');
                 destObject.push({
                     id: cc.categoryCompositionId,
                     label: categoriesText

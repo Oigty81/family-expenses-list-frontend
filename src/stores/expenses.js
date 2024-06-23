@@ -2,7 +2,6 @@ import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 
 import { ajaxRequestAuthWithParams, ajaxRequestAuthWithData } from '@/utilities/ajax';
-import { bindTextArray } from '@/utilities/text';
 
 import { useCategoriesStore } from '@/stores/categories.js';
 
@@ -23,7 +22,7 @@ export const useExpensesStore = defineStore('expensesStore', () => {
                 categoriesStore.getCategoriesData.categoryCompositionsData.forEach(cc => {
                     
                     if(e.categoryCompositionId === cc.categoryCompositionId) {
-                        let categoryCompositionText = bindTextArray(cc.categories);
+                        let categoryCompositionText = cc.categories.join(' / ');
                         
                         destObject.push({
                             categoryCompositionText: categoryCompositionText,
