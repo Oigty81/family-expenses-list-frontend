@@ -7,6 +7,8 @@ import { useUserStore  } from '@/stores/user';
 import { useLanguageDataStore } from '@/stores/language.js';
 import { useUtilitiesStore } from '../stores/utilities.js';
 
+import LanguageSelector from "@components/ui/LanguageSelector.vue";
+
 const router = useRouter();
 const userStore = useUserStore();
 const languageDataStore  = useLanguageDataStore();
@@ -67,10 +69,13 @@ const clickCloseApp = async () => {
                     >
                   </q-avatar>
                 </div>
-                <div class="col-9">
+                <div class="col-7">
                   <div class="text-grey-9 text-h5 text-weight-bold">
                     {{ languageDataStore.getLanguageText('singIn') }}
                   </div>
+                </div>
+                <div class="col-2 text-left">
+                  <LanguageSelector />
                 </div>
               </div>
             </q-card-section>
