@@ -7,6 +7,8 @@ import { useLanguageStore } from '@/stores/language.js';
 import { useUserStore } from '@/stores/user.js';
 import { useUtilitiesStore } from '../stores/utilities.js';
 
+import LanguageSelector from "@components/ui/LanguageSelector.vue";
+
 const MENU_BREAKPOINT = 4096; // hack, always display menu-button when use mobile-app layout
 
 const router = useRouter();
@@ -87,6 +89,7 @@ const clickLogout = async () => {
           icon="menu"
           @click="toggleLeftDrawer"
         />
+        <LanguageSelector class="q-mt-sm" />
         <span
           v-if="utilitiesStore.getBatteryState >= 90"
           class="text-h4 q-ml-md q-mr-md"

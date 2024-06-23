@@ -6,6 +6,8 @@ import { useUiStore } from '@/stores/ui.js';
 import { useLanguageStore } from '@/stores/language.js';
 import { useUserStore } from '@/stores/user.js';
 
+import LanguageSelector from "@components/ui/LanguageSelector.vue";
+
 const MENU_BREAKPOINT = 2024;
 
 const router = useRouter();
@@ -69,6 +71,7 @@ const clickLogout = async () => {
             </span>
           </q-badge>
         </q-toolbar-title>
+        <LanguageSelector class="q-mt-sm" />
         <q-btn
           v-if="userStore.IsAuthenticated"
           class="q-ma-xs"
