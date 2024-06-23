@@ -102,7 +102,7 @@ const clickLogout = async () => {
       >
         <q-item class="non-selectable">
           <q-item-section class="text-h5 text-center">
-            {{ languageDataStore.currentLanguageText('menu') }}
+            {{ languageDataStore.getLanguageText('menu') }}
           </q-item-section>
         </q-item>
 

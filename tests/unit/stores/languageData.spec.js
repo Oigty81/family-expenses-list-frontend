@@ -20,11 +20,11 @@ describe('test "languageDataStore"', () => {
     });
 
     test('whether import correct languages with required properties and change language', () => {
-        expect(languageDataStore.currentLanguageText('singIn')).toBe("Sign in");
+        expect(languageDataStore.getLanguageText('singIn')).toBe("Sign in");
         appStateStore.currentLanguageId = 2;
-        expect(languageDataStore.currentLanguageText('singIn')).toBe("Anmelden");
+        expect(languageDataStore.getLanguageText('singIn')).toBe("Anmelden");
 
-        expect(languageDataStore.currentLanguageText('anySomesthing')).toBe("?-?-?");
+        expect(languageDataStore.getLanguageText('anySomesthing')).toBe("?-?-?");
     });
 
     test('whether formatedDateTime correctly works', () => {

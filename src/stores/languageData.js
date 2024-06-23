@@ -16,7 +16,7 @@ export const useLanguageDataStore = defineStore('languageDataStore', () => {
         "ge": ge,
     };
 
-    const currentLanguageText = computed(() => {
+    const getLanguageText = computed(() => {
         return (textKey) => {
             const currentSet = appStateStore.currentLanguageId === 1 ?  languageData.en : languageData.ge;
             if(currentSet !== undefined && currentSet.dictionary !== undefined && currentSet.dictionary[textKey] !== undefined) {
@@ -66,7 +66,7 @@ export const useLanguageDataStore = defineStore('languageDataStore', () => {
     });
 
     return {
-        currentLanguageText, useCommaForNumberInUi, formatedDateTime, dateTimePickerLocation
+        getLanguageText, useCommaForNumberInUi, formatedDateTime, dateTimePickerLocation
     };
 });
 

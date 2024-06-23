@@ -69,7 +69,7 @@ const clickCloseApp = async () => {
                 </div>
                 <div class="col-9">
                   <div class="text-grey-9 text-h5 text-weight-bold">
-                    {{ languageDataStore.currentLanguageText('singIn') }}
+                    {{ languageDataStore.getLanguageText('singIn') }}
                   </div>
                 </div>
               </div>
@@ -79,7 +79,7 @@ const clickCloseApp = async () => {
                 v-model="username"
                 dense
                 outlined
-                :label="languageDataStore.currentLanguageText('username')"
+                :label="languageDataStore.getLanguageText('username')"
                 @keydown.enter.prevent="clickLogin()"
               />
               <q-input
@@ -88,7 +88,7 @@ const clickCloseApp = async () => {
                 outlined
                 class="q-mt-md"
                 type="password"
-                :label="languageDataStore.currentLanguageText('password')"
+                :label="languageDataStore.getLanguageText('password')"
                 @keydown.enter.prevent="clickLogin()"
               />
               <div class="text-red-8 text-subtitle1">
@@ -108,7 +108,7 @@ const clickCloseApp = async () => {
               >
                 <span
                   v-if="!userStore.IsLoginRequest"
-                >{{ languageDataStore.currentLanguageText('singIn') }}&nbsp;</span>
+                >{{ languageDataStore.getLanguageText('singIn') }}&nbsp;</span>
                 <q-spinner-oval
                   v-if="userStore.IsLoginRequest"
                   color="amber"
