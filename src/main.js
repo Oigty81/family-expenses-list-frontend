@@ -5,8 +5,6 @@ import router from './router';
 import { Quasar, Notify, Dialog, Loading } from 'quasar';
 import lang from 'quasar/lang/de.js';
 
-import { useLanguageStore } from '@/stores/language.js';
-
 // Import font and icon libraries
 import '@quasar/extras/roboto-font/roboto-font.css';
 import '@quasar/extras/material-icons/material-icons.css';
@@ -42,7 +40,5 @@ app.use(Quasar, {
 });
 
 // -----
-
-useLanguageStore().loadLanguageSettings(import.meta.env.VITE_LOCAL_LANGUAGE);
 
 app.mount('#app');

@@ -134,7 +134,7 @@ const clickLogout = async () => {
       >
         <q-item class="non-selectable">
           <q-item-section class="text-h5 text-center">
-            {{ languageStore.getDictionary.menu ? languageStore.getDictionary.menu : "N/A" }}
+            {{ languageDataStore.currentLanguageText('menu') }}
           </q-item-section>
         </q-item>
 

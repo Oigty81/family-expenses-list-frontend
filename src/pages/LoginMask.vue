@@ -4,12 +4,12 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { useUserStore  } from '@/stores/user';
-import { useLanguageStore } from '@/stores/language.js';
+import { useLanguageDataStore } from '@/stores/language.js';
 import { useUtilitiesStore } from '../stores/utilities.js';
 
 const router = useRouter();
 const userStore = useUserStore();
-const languageStore  = useLanguageStore();
+const languageDataStore  = useLanguageDataStore();
 const utilitiesStore = useUtilitiesStore();
 
 const username = ref("");
@@ -69,7 +69,7 @@ const clickCloseApp = async () => {
                 </div>
                 <div class="col-9">
                   <div class="text-grey-9 text-h5 text-weight-bold">
-                    {{ languageStore.getDictionary.singIn }}
+                    {{ languageDataStore.currentLanguageText('singIn') }}
                   </div>
                 </div>
               </div>
@@ -79,7 +79,7 @@ const clickCloseApp = async () => {
                 v-model="username"
                 dense
                 outlined
-                :label="languageStore.getDictionary.username"
+                :label="languageDataStore.currentLanguageText('username')"
                 @keydown.enter.prevent="clickLogin()"
               />
               <q-input
@@ -88,7 +88,7 @@ const clickCloseApp = async () => {
                 outlined
                 class="q-mt-md"
                 type="password"
-                :label="languageStore.getDictionary.password"
+                :label="languageDataStore.currentLanguageText('password')"
                 @keydown.enter.prevent="clickLogin()"
               />
               <div class="text-red-8 text-subtitle1">
@@ -108,7 +108,7 @@ const clickCloseApp = async () => {
               >
                 <span
                   v-if="!userStore.IsLoginRequest"
-                >{{ languageStore.getDictionary.singIn }}&nbsp;</span>
+                >{{ languageDataStore.currentLanguageText('singIn') }}&nbsp;</span>
                 <q-spinner-oval
                   v-if="userStore.IsLoginRequest"
                   color="amber"

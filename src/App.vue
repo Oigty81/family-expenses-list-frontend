@@ -8,6 +8,7 @@ import MenuLayoutWeb from '@/layouts/MenuLayoutWeb.vue';
 import MenuLayoutApp from '@/layouts/MenuLayoutApp.vue';
 import MenuLayoutError from '@/layouts/MenuLayoutError.vue';
 
+const uiStore  = useUiStore();
 const userStore  = useUserStore();
 const utilitiesStore = useUtilitiesStore();
 

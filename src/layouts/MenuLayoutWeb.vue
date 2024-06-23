@@ -10,7 +10,7 @@ const MENU_BREAKPOINT = 2024;
 
 const router = useRouter();
 const uiStore = useUiStore();
-const languageStore  = useLanguageStore();
+const languageDataStore  = useLanguageStore();
 const userStore = useUserStore();
 
 const leftDrawerOpen = ref(false);
@@ -102,7 +102,7 @@ const clickLogout = async () => {
       >
         <q-item class="non-selectable">
           <q-item-section class="text-h5 text-center">
-            {{ languageStore.getDictionary.menu ? languageStore.getDictionary.menu : "N/A" }}
+            {{ languageDataStore.currentLanguageText('menu') }}
           </q-item-section>
         </q-item>
 

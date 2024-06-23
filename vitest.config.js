@@ -24,13 +24,14 @@ export default defineConfig({
             ...configDefaults.exclude,
             'dist2',
 
-            //'tests/unit/stores/ui.spec.js',
-            //'tests/unit/stores/language.spec.js',
-            //'tests/unit/stores/user.spec.js',
-            //'tests/unit/stores/categories.spec.js',
-            //'tests/unit/stores/expenses.spec.js',
+            'tests/unit/stores/ui.spec.js',
+            //'tests/unit/stores/languageData.spec.js',
+            'tests/unit/stores/user.spec.js',
+            'tests/unit/stores/categories.spec.js',
+            'tests/unit/stores/expenses.spec.js',
+            'tests/unit/stores/utilities.spec.js',
 
-            //'tests/unit/utilities/ajaxWeb.spec.js'
+            'tests/unit/utilities/ajaxWeb.spec.js'
  
         ]
     },
