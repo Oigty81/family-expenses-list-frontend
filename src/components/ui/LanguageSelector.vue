@@ -8,12 +8,12 @@
 <template>
   <q-btn-toggle
     v-model="appState.currentLanguageId"
-    toggle-color="green"
+    toggle-color="green-4"
     class="toggle-1 bg-white"
     no-caps
     unelevated
-    color="gray-10"
-    text-color="blue-7"
+    color="gray-7"
+    text-color="blue-9"
     :options="[
       {label: 'En', value: 1},
       {label: 'De', value: 2},

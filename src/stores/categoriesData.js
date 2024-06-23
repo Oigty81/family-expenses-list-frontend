@@ -64,7 +64,7 @@ export const useCategoriesDataStore = defineStore('categoriesDataStore', () => {
                 categoriesData.value = {
                     categories : [],
                     categoryCompositions: []
-                }
+                };
                 reject(err);
             });
         });

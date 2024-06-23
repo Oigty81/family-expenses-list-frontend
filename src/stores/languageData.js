@@ -22,16 +22,17 @@ export const useLanguageDataStore = defineStore('languageDataStore', () => {
             if(currentSet !== undefined && currentSet.dictionary !== undefined && currentSet.dictionary[textKey] !== undefined) {
                 return currentSet.dictionary[textKey];
             } else {
-                return "?-?-?"
+                return "?-?-?";
             }
-        }
+        };
     });
 
     const useCommaForNumberInUi = computed(() => {
-        if(languageSettings.value.useCommaForNumberInUi === undefined) {
+        const currentSet = appStateStore.currentLanguageId === 1 ?  languageData.en : languageData.ge;
+        if(currentSet.useCommaForNumberInUi === undefined) {
             return false;
         } else {
-            return languageSettings.value.useCommaForNumberInUi;
+            return currentSet.useCommaForNumberInUi;
         }
     });
 
@@ -61,7 +62,7 @@ export const useLanguageDataStore = defineStore('languageDataStore', () => {
         if(appStateStore.currentLanguageId === 1 ) {
             return 'en';
         } else {
-            return 'ge'
+            return 'ge';
         }
     });
 

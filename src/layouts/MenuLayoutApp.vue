@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { useUiStore } from '@/stores/ui.js';
-import { useLanguageStore } from '@/stores/language.js';
+import { useLanguageDataStore } from '@/stores/languageData.js';
 import { useUserStore } from '@/stores/user.js';
 import { useUtilitiesStore } from '../stores/utilities.js';
 
@@ -13,14 +13,13 @@ const MENU_BREAKPOINT = 4096; // hack, always display menu-button when use mobil
 
 const router = useRouter();
 const uiStore = useUiStore();
-const languageStore  = useLanguageStore();
+const languageDataStore  = useLanguageDataStore();
 const userStore = useUserStore();
 const utilitiesStore = useUtilitiesStore();
 
 const leftDrawerOpen = ref(false);
 const isDesktopBreakPoint = ref(false);
 const showTopMenuButton = ref(false);
-const footerEnabled = ref(import.meta.env.VITE_LOCAL_FOOTER_ENABLED.toLowerCase() === "true" ? true : false);
 
 const toggleLeftDrawer = () => {
         leftDrawerOpen.value = !leftDrawerOpen.value;
@@ -89,7 +88,7 @@ const clickLogout = async () => {
           label="Logout"
           @click="clickLogout()"
         />
-        <LanguageSelector class="q-mt-sm" />
+        <LanguageSelector />
         <span
           v-if="utilitiesStore.getBatteryState >= 90"
           class="text-h4 q-ml-md q-mr-md"
@@ -171,17 +170,6 @@ const clickLogout = async () => {
         >
           <q-item-section>
             <q-item-label>Edit Category Composition</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item
-          v-ripple
-          clickable
-          active-class="bg-grey-4 text-blue-12"
-          to="/add-expenses"
-        >
-          <q-item-section>
-            <q-item-label>Add Expenses</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>

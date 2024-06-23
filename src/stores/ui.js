@@ -15,6 +15,6 @@ export const useUiStore = defineStore('uiStore', () => {
     });
     
     return {
-        heightViewport, heightHeader, heightContent, heightExpensesList        
+        heightViewport, heightHeader, heightContent, heightExpensesList
     };
 });

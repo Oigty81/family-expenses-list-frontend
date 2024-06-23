@@ -17,7 +17,7 @@ const model = ref(null);
 
 onMounted( async () => {
   $q.loading.show();
-  await categoriesStore.fetchCategories();
+  await categoriesDataStore.fetchCategories();
   $q.loading.hide();
 });
 
@@ -66,13 +66,14 @@ const saveNewCategoryComposition = async () => {
           use-chips
           multiple
           input-debounce="0"
-          :options="categoriesStore.categoryDataForSelector"
+          :options="categoriesDataStore.categoryDataForSelector"
           style="width: 100%"
         />
       </div>
     </div>
     <div class="col-5">
       <q-btn
+        no-caps
         style="width: 100%"
         outline
         class="q-pa-md q-ml-md q-mt-md"

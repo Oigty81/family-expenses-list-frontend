@@ -13,11 +13,11 @@ export const useExpensesDataStore = defineStore('expensesDataStore', () => {
     const isFetchExpenses = ref(false);
 
     const expensesForTableView = computed(() => {
-        if( expensesPeriod.value.length > 0 &&
+        if( expensesData.value.length > 0 &&
             categoriesDataStore.categoriesData.categoryCompositions !== undefined &&
             categoriesDataStore.categoriesData.categoryCompositions.length > 0) {
                 let destObject = [];
-            expensesPeriod.value.forEach(e => {
+            expensesData.value.forEach(e => {
                 categoriesDataStore.categoriesData.categoryCompositions.forEach(cc => {
                     
                     if(e.categoryCompositionId === cc.categoryCompositionId) {
@@ -93,7 +93,7 @@ export const useExpensesDataStore = defineStore('expensesDataStore', () => {
     };
 
     return {
-        expensesData, isFetchExpenses, expensesForTableView, 
+        expensesData, isFetchExpenses, expensesForTableView,
         fetchExpenses, putExpenses, updateExpenses, deleteExpenses
     };
 });

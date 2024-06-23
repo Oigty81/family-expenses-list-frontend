@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { useUiStore } from '@/stores/ui.js';
-import { useLanguageStore } from '@/stores/language.js';
+import { useLanguageDataStore } from '@/stores/languageData.js';
 import { useUserStore } from '@/stores/user.js';
 
 import LanguageSelector from "@components/ui/LanguageSelector.vue";
@@ -12,13 +12,12 @@ const MENU_BREAKPOINT = 2024;
 
 const router = useRouter();
 const uiStore = useUiStore();
-const languageDataStore  = useLanguageStore();
+const languageDataStore  = useLanguageDataStore();
 const userStore = useUserStore();
 
 const leftDrawerOpen = ref(false);
 const isDesktopBreakPoint = ref(false);
 const showTopMenuButton = ref(false);
-const footerEnabled = ref(import.meta.env.VITE_LOCAL_FOOTER_ENABLED.toLowerCase() === "true" ? true : false);
 
 const toggleLeftDrawer = () => {
         leftDrawerOpen.value = !leftDrawerOpen.value;
@@ -79,7 +78,7 @@ const clickLogout = async () => {
             </span>
           </q-badge>
         </q-toolbar-title>
-        <LanguageSelector class="q-mt-sm" />
+        <LanguageSelector />
         <q-btn
           v-if="userStore.isAuthenticated"
           class="q-ma-xs"
@@ -139,17 +138,6 @@ const clickLogout = async () => {
         >
           <q-item-section>
             <q-item-label>Edit Category Composition</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item
-          v-ripple
-          clickable
-          active-class="bg-grey-4 text-blue-12"
-          to="/add-expenses"
-        >
-          <q-item-section>
-            <q-item-label> Add Expenses</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>

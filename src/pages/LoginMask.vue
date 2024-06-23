@@ -4,7 +4,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { useUserStore  } from '@/stores/user';
-import { useLanguageDataStore } from '@/stores/language.js';
+import { useLanguageDataStore } from '@/stores/languageData.js';
 import { useUtilitiesStore } from '../stores/utilities.js';
 
 import LanguageSelector from "@components/ui/LanguageSelector.vue";
@@ -57,6 +57,7 @@ const clickCloseApp = async () => {
         <q-page class="flex flex-center bg-grey-5">
           <q-card
             class="q-pa-md shadow-2"
+            style="min-width: 640px;"
             bordered
           >
             <q-card-section class="text-center">

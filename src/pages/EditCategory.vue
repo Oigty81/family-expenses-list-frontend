@@ -11,7 +11,7 @@ const router = useRouter();
 
 const $q = useQuasar();
 
-const categoriesStore  = useCategoriesDataStore();
+const categoriesDataStore  = useCategoriesDataStore();
 
 const categoryName = ref("");
 const errorMessage = ref("");
@@ -81,6 +81,7 @@ watch(categoryName, (v) => {
     </div>
     <div class="col-md-2">
       <q-btn
+        no-caps
         style="width: 100%"
         outline
         class="q-pa-md q-ml-md"
