@@ -108,14 +108,14 @@ const clickCloseApp = async () => {
                 size="md"
                 no-caps
                 class="full-width"
-                :disable="userStore.IsLoginRequest"
+                :disable="userStore.isLoginRequest"
                 @click="clickLogin()"
               >
                 <span
-                  v-if="!userStore.IsLoginRequest"
+                  v-if="!userStore.isLoginRequest"
                 >{{ languageDataStore.getLanguageText('singIn') }}&nbsp;</span>
                 <q-spinner-oval
-                  v-if="userStore.IsLoginRequest"
+                  v-if="userStore.isLoginRequest"
                   color="amber"
                 />
               </q-btn>
@@ -130,7 +130,7 @@ const clickCloseApp = async () => {
                 size="md"
                 no-caps
                 class="full-width"
-                :disable="userStore.IsLoginRequest"
+                :disable="userStore.isLoginRequest"
                 @click="clickCloseApp()"
               >
                 <span>Close App</span>

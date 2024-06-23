@@ -17,9 +17,7 @@ export const useUserStore = defineStore('userStore', () => {
     const isAuthenticated = ref (false);
     const userData = ref(undefined);
     const isLoginRequest = ref (false);
-    // -------------------
 
-    const IsAuthenticated = computed(() => isAuthenticated.value);
     const getUserData = computed(() => {
         if(userData.value === undefined || userData.value === null) {
             return {
@@ -31,10 +29,6 @@ export const useUserStore = defineStore('userStore', () => {
             return userData.value;
         }
     });
-
-    const IsLoginRequest = computed(() => isLoginRequest.value);
-        
-    // -------------------
 
     const login = async (username, password) => {
         isLoginRequest.value = true;
@@ -89,8 +83,7 @@ export const useUserStore = defineStore('userStore', () => {
     };
 
     return {
-        IsAuthenticated, getUserData, IsLoginRequest,
-
+        isAuthenticated, getUserData, isLoginRequest,
         login, logout, setUserIsAuthenticatedWhenTokenIsAvailableAndValid
     };
 });

@@ -73,7 +73,7 @@ const clickLogout = async () => {
         </q-toolbar-title>
         <LanguageSelector class="q-mt-sm" />
         <q-btn
-          v-if="userStore.IsAuthenticated"
+          v-if="userStore.isAuthenticated"
           class="q-ma-xs"
           color="primary"
           icon="fa-solid fa-arrow-right-from-bracket"

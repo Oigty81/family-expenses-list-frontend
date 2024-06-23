@@ -57,7 +57,7 @@ router.beforeEach((to, from, next) => {
   
   const userStore = useUserStore();
   
-  if (to.name !== 'LoginMask' && !userStore.IsAuthenticated) {
+  if (to.name !== 'LoginMask' && !userStore.isAuthenticated) {
     next({ name: 'LoginMask' });
   } else {
     next();
