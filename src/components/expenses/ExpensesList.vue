@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue';
 
-import { useExpensesDataStore  } from '@/stores/expensesData.js';
-
-const expensesDataStore  = useExpensesDataStore();
-
 defineProps({
+    expensesData: { type: Array, required: true, default: () => {
+            return [ ];
+        }
+    },
     tableHeight: { type: Number, required: false, default: () => {
         return 240;
       }
@@ -69,7 +69,7 @@ const columns = ref([
         v-model:pagination="pagination"
         class="this-q-table"
         :style="{height: tableHeight +'px'}"
-        :rows="expensesDataStore.expensesForTableView"
+        :rows="expensesData"
         :columns="columns"
         :hide-bottom="true"
         row-key="name"
@@ -110,4 +110,4 @@ const columns = ref([
 .my-table-header {
     font-size: 1rem;
 }
-</style>@stores/expensesData.js
+</style>

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 
-import { ajaxRequestAuthWithParams, ajaxRequestAuthWithData } from '@/utilities/ajax';
+import { ajaxRequestAuthWithData } from '@/utilities/ajax';
 
 import { useCategoriesDataStore } from '@stores/categoriesData.js';
 
@@ -9,15 +9,15 @@ export const useExpensesDataStore = defineStore('expensesDataStore', () => {
 
     const categoriesDataStore  = useCategoriesDataStore();
 
-    const expensesData = ref([]);
+    const expensesSet = ref([]);
     const isFetchExpenses = ref(false);
 
     const expensesForTableView = computed(() => {
-        if( expensesData.value.length > 0 &&
+        if( expensesSet.value.expenses !== undefined && expensesSet.value.expenses.length > 0 &&
             categoriesDataStore.categoriesData.categoryCompositions !== undefined &&
             categoriesDataStore.categoriesData.categoryCompositions.length > 0) {
                 let destObject = [];
-            expensesData.value.forEach(e => {
+            expensesSet.value.expenses.forEach(e => {
                 categoriesDataStore.categoriesData.categoryCompositions.forEach(cc => {
                     
                     if(e.categoryCompositionId === cc.categoryCompositionId) {
@@ -42,15 +42,15 @@ export const useExpensesDataStore = defineStore('expensesDataStore', () => {
     const fetchExpenses = async (filters) => {
         return new Promise((resolve, reject) => {
             isFetchExpenses.value = true;
-            ajaxRequestAuthWithParams("/expenses/getExpenses", "GET", filters)
+            ajaxRequestAuthWithData("/expenses/getExpenses", "POST", filters)
             .then((response) => {
                 isFetchExpenses.value = false;
-                expensesData.value = response.data;
+                expensesSet.value = response.data;
                 resolve();
             })
             .catch((err)=> {
                 isFetchExpenses.value = false;
-                expensesData.value = [];
+                expensesSet.value = [];
                 reject(err);
             });
         });
@@ -93,7 +93,7 @@ export const useExpensesDataStore = defineStore('expensesDataStore', () => {
     };
 
     return {
-        expensesData, isFetchExpenses, expensesForTableView,
+        expensesSet, isFetchExpenses, expensesForTableView,
         fetchExpenses, putExpenses, updateExpenses, deleteExpenses
     };
 });
