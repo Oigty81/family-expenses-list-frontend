@@ -1,4 +1,11 @@
 
-  .my-q-add-category .q-field__messages.col {
+.custom-dtp-1 {
+  & .dp__arrow_bottom, & .dp__arrow_top {
+      display: none;
+    }
+}
+  
+  
+.my-q-add-category .q-field__messages.col {
     color: $negative !important;
-  }
+}
