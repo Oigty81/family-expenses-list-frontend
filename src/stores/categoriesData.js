@@ -15,7 +15,7 @@ export const useCategoriesDataStore = defineStore('categoriesDataStore', () => {
     // -------------------
 
     const categoryDataForSelector = computed(()=> {
-        let cd = categoriesData.value.categoriesData;
+        let cd = categoriesData.value.categories;
         let destObject = [];
         if(cd !== undefined && cd.length !== 0) {
             cd.forEach(c => {
@@ -32,7 +32,7 @@ export const useCategoriesDataStore = defineStore('categoriesDataStore', () => {
     });
 
     const categoryCompositionsDataForSelector = computed(()=> {
-        let ccd = categoriesData.value.categoryCompositionsData;
+        let ccd = categoriesData.value.categoryCompositions;
         let destObject = [];
         if(ccd !== undefined && ccd.length !== 0) {
             ccd.forEach(cc => {
