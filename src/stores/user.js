@@ -72,7 +72,7 @@ export const useUserStore = defineStore('userStore', () => {
             ) {
                 let dateNow = new Date();
                 const tokenData = jwtDecode(sessionStorage.getItem('accessToken'));
-                console.log('decode', tokenData.exp, dateNow.getTime() / 1000);
+                
                 if(tokenData.exp < (dateNow.getTime() / 1000)) {
                     isAuthenticated.value = false;
                     sessionStorage.removeItem('accessToken');
