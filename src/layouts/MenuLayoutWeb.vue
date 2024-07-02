@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 
 import { useUiStore } from '@/stores/ui.js';
 import { useLanguageDataStore } from '@/stores/languageData.js';
@@ -10,7 +9,6 @@ import LanguageSelector from "@components/ui/LanguageSelector.vue";
 
 const MENU_BREAKPOINT = 2024;
 
-const router = useRouter();
 const uiStore = useUiStore();
 const languageDataStore  = useLanguageDataStore();
 const userStore = useUserStore();
@@ -34,12 +32,6 @@ const onResize = (size) => {
       showTopMenuButton.value = true;
       isDesktopBreakPoint.value = false;
   }
-};
-
-const clickLogout = async () => {
-  userStore.logout();
-  await router.push({ path: '/dummy' });
-  await router.push({ path: '/' });
 };
 
 </script>
@@ -85,7 +77,7 @@ const clickLogout = async () => {
           color="primary"
           icon="fa-solid fa-arrow-right-from-bracket"
           label="Logout"
-          @click="clickLogout()"
+          @click="userStore.logout()"
         />
       </q-toolbar>
     </q-header>

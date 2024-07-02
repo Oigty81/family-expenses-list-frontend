@@ -1,15 +1,17 @@
 
-import { useCategoriesDataStore } from '@stores/categoriesData.js';
-import { useExpensesDataStore  } from '@stores/expensesData.js';
-
-import { ajaxRequestForLogin } from '@/utilities/ajax';
+import { defineStore } from 'pinia';
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { jwtDecode } from "jwt-decode";
 
-import { defineStore } from 'pinia';
-import { ref, computed } from 'vue';
+import { ajaxRequestForLogin } from '@/utilities/ajax';
+
+import { useCategoriesDataStore } from '@stores/categoriesData.js';
+import { useExpensesDataStore  } from '@stores/expensesData.js';
 
 export const useUserStore = defineStore('userStore', () => {
+    const router = useRouter();
 
     const categoriesDataStore  = useCategoriesDataStore();
     const expensesDataStore  = useExpensesDataStore();
@@ -59,6 +61,7 @@ export const useUserStore = defineStore('userStore', () => {
             categoryCompositions: []
         };
         expensesDataStore.expensesData = [];
+        await router.push({ path: '/login' });
     };
 
     const setUserIsAuthenticatedWhenTokenIsAvailableAndValid = async () => {

@@ -38,12 +38,6 @@ const onResize = (size) => {
   }
 };
 
-const clickLogout = async () => {
-  userStore.logout();
-  await router.push({ path: '/dummy' });
-  await router.push({ path: '/' });
-};
-
 </script>
 
 <template>
@@ -86,7 +80,7 @@ const clickLogout = async () => {
           color="primary"
           icon="fa-solid fa-arrow-right-from-bracket"
           label="Logout"
-          @click="clickLogout()"
+          @click="userStore.logout()"
         />
         <LanguageSelector />
         <span
