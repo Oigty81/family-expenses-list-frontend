@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 import { useAppStateStore  } from '@/stores/appState';
 import { useLanguageDataStore  } from '@/stores/languageData';
@@ -31,11 +31,11 @@ const pagination = ref({
         descending: true,
       });
 
-const columns = ref([
+const columns = computed(() => [
     {
         name: 'displayname',
         required: true,
-        label: 'User',
+        label: languageDataStore.getLanguageText('expensesListColumnUser'),
         align: 'left',
         field: 'displayname',
         sortable: true
@@ -43,7 +43,7 @@ const columns = ref([
     {
         name: 'categoryCompositionText',
         required: true,
-        label: 'Category-Composition',
+        label: languageDataStore.getLanguageText('expensesListColumnCategoryComposition'),
         align: 'left',
         field: 'categoryCompositionText',
         sortable: false
@@ -51,7 +51,7 @@ const columns = ref([
     {
         name: 'price',
         required: true,
-        label: 'Price',
+        label: languageDataStore.getLanguageText('expensesListColumnPrice'),
         align: 'left',
         field: 'price',
         sortable: true,
@@ -60,7 +60,7 @@ const columns = ref([
     {
         name: 'created',
         required: true,
-        label: 'Created',
+        label: languageDataStore.getLanguageText('expensesListColumnCreated'),
         align: 'left',
         field: 'created',
         sortable: true
@@ -68,7 +68,7 @@ const columns = ref([
     {
         name: 'metatext',
         required: true,
-        label: 'Metatext',
+        label: languageDataStore.getLanguageText('expensesListColumnMetatext'),
         align: 'left',
         field: 'metatext',
         sortable: false

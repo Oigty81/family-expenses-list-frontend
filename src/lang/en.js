@@ -17,7 +17,13 @@ export default {
         "tooltipAddExpenses": "add expenses",
         "labelExpensesPeriod": "select expenses period",
         "labelCategorySelector": "select categories",
-        "labelMetatextFilter" : "search for metatext",
+        "labelMetatextFilter": "search for metatext",
+
+        "expensesListColumnUser": "User",
+        "expensesListColumnCategoryComposition": "Category-Composition",
+        "expensesListColumnPrice": "Price",
+        "expensesListColumnCreated": "Created",
+        "expensesListColumnMetatext": "Metatext",
 
         "tooltipDeleteExpenses": "delete expenses",
         "confirmDeleteExpensesHeader": "Warning",

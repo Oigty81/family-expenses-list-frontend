@@ -17,7 +17,13 @@ export default {
         "tooltipAddExpenses": "Ausgabe hinzufügen",
         "labelExpensesPeriod": "Wähle Ausgabenzeitraum",
         "labelCategorySelector": "Wähle Kategorien",
-        "labelMetatextFilter" : "Suche nach Metatext",
+        "labelMetatextFilter": "Suche nach Metatext",
+
+        "expensesListColumnUser": "Benutzer",
+        "expensesListColumnCategoryComposition": "Kategoriezusammensetzung",
+        "expensesListColumnPrice": "Preis",
+        "expensesListColumnCreated": "Erstellt am",
+        "expensesListColumnMetatext": "Zusatzinfo",
 
         "tooltipDeleteExpenses": "Ausgabe löschen",
         "confirmDeleteExpensesHeader": "Achtung",
