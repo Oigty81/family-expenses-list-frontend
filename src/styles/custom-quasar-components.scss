@@ -1,4 +1,11 @@
 
+.popup-edit {
+  transform: scale(0.9);
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 400px;
+}
+
 .custom-dtp-1 {
   & .dp__arrow_bottom, & .dp__arrow_top {
       display: none;

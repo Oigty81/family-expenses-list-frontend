@@ -72,6 +72,11 @@ const onUpdateCreated = async ($e) => {
   loadExpensesListDebounced();
 };
 
+const onUpdateMetatext = async ($e) => {
+  await expensesDataStore.updateExpenses($e.id, { metatext: $e.metatext });
+  loadExpensesListDebounced();
+};
+
 const onDeleteExpenses = async ($e) => {
   $q.dialog({
         title: languageDataStore.getLanguageText('confirmDeleteExpensesHeader'),
@@ -107,6 +112,7 @@ const onDeleteExpenses = async ($e) => {
         :expenses-data="expensesDataStore.expensesForTableView"
         :table-height="uiStore.heightExpensesList"
         @update-created="onUpdateCreated"
+        @update-metatext="onUpdateMetatext"
         @delete-expenses="onDeleteExpenses"
       />
     </div>

@@ -5,6 +5,7 @@ import { useAppStateStore  } from '@/stores/appState';
 import { useLanguageDataStore  } from '@/stores/languageData';
 
 import CustomDataTimeSelector from '@components/ui/CustomDataTimeSelector.vue';
+import ExpensesListEditMetatext from '@components/expenses/ExpensesListEditMetatext.vue';
 
 const emit = defineEmits([
   'updatePrice', 'updateCreated', 'updateMetatext', 'deleteExpenses',
@@ -119,13 +120,38 @@ const columns = computed(() => [
             {{ languageDataStore.formatedDateTime('dt',props.row.created) }}
             <CustomDataTimeSelector
               :initial-date-time="props.row.created"
-              @update="($e)=> {
+              @update="($e) => {
                 emit('updateCreated', {
                   id: props.row.id,
                   created: $e
                 });
               }"
             />
+          </q-td>
+        </template>
+        <template #body-cell-metatext="props">
+          <q-td
+          class="text-left"
+          >
+            {{ props.row.metatext }}
+            <i class="q-ml-sm fa-solid fa-pencil">
+              <q-popup-edit
+                v-slot="scope"
+                class="popup-edit"
+              >
+                <ExpensesListEditMetatext
+                  :current-metatext="props.row.metatext"
+                  @update-metatext="($e) => {
+                    emit('updateMetatext', {
+                      id: props.row.id,
+                      metatext: $e
+                    });
+                    scope.set();
+                  }"
+                />
+              </q-popup-edit>
+            </i>
+            
           </q-td>
         </template>
         <template #body-cell-controls="props">
