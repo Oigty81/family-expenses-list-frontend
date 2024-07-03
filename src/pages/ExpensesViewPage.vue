@@ -23,14 +23,13 @@ const languageDataStore = useLanguageDataStore();
 const categoriesDataStore = useCategoriesDataStore();
 const expensesDataStore  = useExpensesDataStore();
 
-let expensesPageFilters = {};
 let timeoutLoadExpensesList = null;
 let refreshHandler = null;
 
 const loadExpensesListDebounced = async () => {
   clearTimeout(timeoutLoadExpensesList);
   timeoutLoadExpensesList = setTimeout(() => {
-    expensesDataStore.fetchExpenses(expensesPageFilters);
+    expensesDataStore.fetchExpenses(appStateStore.expensesPageFilters);
   }, appStateStore.loadExpensesDebounceTime);
 };
 
@@ -52,7 +51,6 @@ const onResizeExpensesListControlBoard = ($e) => {
 };
 
 const onUpdateFilter = ($e) => {
-  expensesPageFilters = $e;
   loadExpensesListDebounced();
 };
 

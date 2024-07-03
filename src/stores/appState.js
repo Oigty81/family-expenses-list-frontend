@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
+import moment from 'moment';
+
 export const useAppStateStore = defineStore('appStateStore', () => {
 
     const currentLanguageId = ref(1);
@@ -8,7 +10,14 @@ export const useAppStateStore = defineStore('appStateStore', () => {
     const inputRequestDebounceTime = ref(300);
     const loadExpensesDebounceTime = ref(100);
     const intervalExpensesViewRefresh = ref(4000);
-    const expensesPageFilters = ref({});
+
+    //NOTE: set current month range initial
+    const expensesPageFilters = ref({
+        daterangeFilter: {
+            from: moment().startOf('month').format('YYYY-MM-DD'),
+            to:  moment().endOf('month').format('YYYY-MM-DD')
+        }
+    });
     const isExpensesPageFiltersSetInitial = ref(true);
     
     return {

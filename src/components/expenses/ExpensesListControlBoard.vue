@@ -20,17 +20,17 @@ const dateRange = ref([]);
 const categoriesModel = ref([]);
 const metatextFilterModel = ref("");
 
-let isUpdateInitial = true;
-
 onBeforeUpdate(() => {
-    if(isUpdateInitial) {
-      dateRange.value = [moment().startOf('month').format('YYYY-MM-DD'), moment().endOf('month').format('YYYY-MM-DD')]; //NOTE: set current month range initial
-      isUpdateInitial = false;
+    if(appStateStore.expensesPageFilters.daterangeFilter !== undefined) {
+      dateRange.value = [appStateStore.expensesPageFilters.daterangeFilter.from, appStateStore.expensesPageFilters.daterangeFilter.to]; //NOTE: set possible dater ange initial filter values
+    } else {
+      dateRange.value = [];
     }
 });
 
 watch(filterOptions, () => {
-  emit('updateFilter', filterOptions.value);
+  appStateStore.expensesPageFilters = filterOptions.value;
+  emit('updateFilter');
   }, {deep: true, immediate: false }
 );
 
