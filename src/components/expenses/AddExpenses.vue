@@ -50,7 +50,7 @@ const onOk = () => {
         outlined
         :label="languageDataStore.getLanguageText('labelAddCategoryComposition')"
         :options="categoriesDataStore.categoryCompositionsDataForSelector"
-        lazy-rules="ondemand"
+        stack-label
       />
     </div>
     <div class="col-sm-6 col-12 q-mt-md q-pr-sm">
@@ -70,7 +70,6 @@ const onOk = () => {
         outlined
         :label="languageDataStore.getLanguageText('labeAddPrice')"
         stack-label
-        style="width: 100%"
       />
     </div>
     <div class="col-sm-6 col-12 q-mt-md q-pr-sm">
@@ -79,7 +78,7 @@ const onOk = () => {
         outlined
         :label="languageDataStore.getLanguageText('labelAddInfo')"
         stack-label
-        style="width: 100%"
+        lazy-rules="ondemand"
       />
     </div>
   </div>
