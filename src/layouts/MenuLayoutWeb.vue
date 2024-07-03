@@ -7,31 +7,18 @@ import { useUserStore } from '@/stores/user.js';
 
 import LanguageSelector from "@components/ui/LanguageSelector.vue";
 
-const MENU_BREAKPOINT = 2024;
-
 const uiStore = useUiStore();
 const languageDataStore  = useLanguageDataStore();
 const userStore = useUserStore();
 
 const leftDrawerOpen = ref(false);
-const isDesktopBreakPoint = ref(false);
-const showTopMenuButton = ref(false);
 
 const toggleLeftDrawer = () => {
         leftDrawerOpen.value = !leftDrawerOpen.value;
 };
 
-const onResize = (size) => {
-    
-  if(size.width >= MENU_BREAKPOINT) {
-      leftDrawerOpen.value = true;
-      showTopMenuButton.value = false;
-      isDesktopBreakPoint.value = true;
-  } else {
-      leftDrawerOpen.value = false;
-      showTopMenuButton.value = true;
-      isDesktopBreakPoint.value = false;
-  }
+const onCloseMenu = () => {
+  leftDrawerOpen.value = false;
 };
 
 </script>
@@ -44,7 +31,6 @@ const onResize = (size) => {
     >
       <q-toolbar>
         <q-btn
-          v-if="showTopMenuButton"
           dense
           flat
           round
@@ -87,7 +73,7 @@ const onResize = (size) => {
       show-if-above
       side="left"
       bordered
-      :breakpoint="MENU_BREAKPOINT"
+      :breakpoint="8192"
     >
       <!-- drawer content -->
       <q-list
@@ -95,9 +81,16 @@ const onResize = (size) => {
         separator
       >
         <q-item class="non-selectable">
-          <q-item-section class="text-h5 text-center">
+          <q-item-section class="text-h5 text-left">
             {{ languageDataStore.getLanguageText('menu') }}
           </q-item-section>
+          <q-btn
+            icon="close"
+            flat
+            round
+            dense
+            @click="onCloseMenu()"
+          />
         </q-item>
 
         <q-item
@@ -141,7 +134,6 @@ const onResize = (size) => {
       :style="{'max-height': uiStore.heightContent + 'px'}"
     >
       <router-view />
-      <q-resize-observer @resize="onResize" />
     </q-page-container>
   </q-layout>
 </template>
