@@ -16,5 +16,9 @@ export default {
         "labelCategorySelector": "Wähle Kategorien",
         "labelMetatextFilter" : "Suche nach Metatext",
         "dlgAddExpenses": "Ausgabe hinzufügen",
+        "labelAddCategoryComposition": "Kategoriezusammensetzung hinzufügen",
+        "labelChooseDatetimeExpenses": "Datum/Uhrzeit für Ausgaben auswählen",
+        "labeAddPrice": "Preis hinzufügen (€)",
+        "labelAddInfo": "Info bzw. Metatext hinzufügen",
     }
 };

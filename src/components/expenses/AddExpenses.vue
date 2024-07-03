@@ -1,26 +1,23 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useQuasar } from 'quasar';
+import { ref, computed } from 'vue';
 
+import moment from 'moment';
 import { useCurrencyInput } from "vue-currency-input";
 
+import { useLanguageDataStore  } from '@/stores/languageData';
 import { useCategoriesDataStore } from '@/stores/categoriesData.js';
-import { useExpensesDataStore  } from '@/stores/expensesData.js';
 
-const router = useRouter();
+import CustomDatetime from '@components/ui/CustomDatetime.vue';
 
-const $q = useQuasar();
+const emit = defineEmits(['closeAdd', 'closeCancel']);
 
 const price = useCurrencyInput({ currency: 'EUR' });
-
-const categoriesDataStore  = useCategoriesDataStore();
-const expensesDatsStore  = useExpensesDataStore();
-
-const errorMessage = ref("");
+const languageDataStore = useLanguageDataStore();
+const categoriesDataStore = useCategoriesDataStore();
 
 const categoryCompositionModel = ref(null);
-const info = ref("");
+const dateTimeExpenses = ref(moment().format("YYYY-MM-DD HH:mm"));
+const metatext = ref("");
 
 const isSaveButtonDisable = computed(() => {
   if(categoryCompositionModel.value === null || price.numberValue.value === null) {
@@ -30,91 +27,85 @@ const isSaveButtonDisable = computed(() => {
   }
 });
 
-onMounted( async () => {
-  $q.loading.show();
-  await categoriesStore.fetchCategories();
-  $q.loading.hide();
-});
+const onCancel = async () => {
+  emit('closeCancel');
+};
 
-
-const saveNewExpenses = async () => {
-  errorMessage.value = "";
-  try {
-    await expensesStore.putExpenses(categoryCompositionModel.value.id, price.numberValue._value, info.value);
-    await router.push("/");
-  } catch(ex) {
-    errorMessage.value = ex.text;
-  }
+const onOk = () => {
+  emit('closeAdd', {
+    categoryCompositionId: categoryCompositionModel.value.id,
+    price: price.numberValue._value,
+    created: dateTimeExpenses.value,
+    metatext: metatext.value
+  });
 };
 
 </script>
 
 <template>
-  <div class="row q-ml-md">
-    <div class="col-9">
-      <h5>Add Expenses</h5>
-    </div>
-  </div>
-  <div class="row q-mt-sm q-mx-md">
-    <div class="col-md-2 col-12">
-      <p>Category Composition:</p>
-    </div>
-    <div class="col-md-3 col-12">
+  <div class="row">
+    <div class="col-sm-6 col-12 q-mt-md q-pr-sm">
       <q-select
         v-model="categoryCompositionModel"
         outlined
-        :options="categoriesStore.getCategoryCompositionsDataForSelector"
-        style="width: 100%"
+        :label="languageDataStore.getLanguageText('labelAddCategoryComposition')"
+        :options="categoriesDataStore.categoryCompositionsDataForSelector"
+        lazy-rules="ondemand"
+      />
+    </div>
+    <div class="col-sm-6 col-12 q-mt-md q-pr-sm">
+      <CustomDatetime
+        :label="languageDataStore.getLanguageText('labelChooseDatetimeExpenses')"
+        :datetime-string="dateTimeExpenses"
+        :position="{x: -0, y:-40}"
+        @update-datetime="($e) => { dateTimeExpenses = $e; }"
       />
     </div>
   </div>
-  <div class="row q-mt-md q-mx-md">
-    <div class="col-md-2 col-12">
-      <p>Price:</p>
-    </div>
-    <div class="col-md-3 col-12">
+  <div class="row">
+    <div class="col-sm-6 col-12 q-mt-md q-pr-sm q-pr-sm">
       <q-input
         :ref="price.inputRef"
         v-model="price.formattedValue"
         outlined
-        class="my-q-add-category"
-        label="Add Price (€)"
+        :label="languageDataStore.getLanguageText('labeAddPrice')"
         stack-label
         style="width: 100%"
       />
     </div>
-  </div>
-  <div class="row q-mt-md q-mx-md">
-    <div class="col-md-2 col-12">
-      <p>Info:</p>
-    </div>
-    <div class="col-md-3 col-12">
+    <div class="col-sm-6 col-12 q-mt-md q-pr-sm">
       <q-input
-        v-model="info"
+        v-model="metatext"
         outlined
-        class="my-q-add-category"
-        label="Add Info"
+        :label="languageDataStore.getLanguageText('labelAddInfo')"
         stack-label
         style="width: 100%"
       />
     </div>
   </div>
-  <div class="row q-mt-md q-mx-md">
-    <div class="col-md-5 col-12">
+  <div class="row q-mt-lg">
+    <div class="col-sm-2 col-5 offset-sm-8 q-pr-sm">
       <q-btn
-        style="width: 100%"
+        no-caps
         outline
-        class=""
-        label="Save Expenses"
-        color="info"
-        :disable="isSaveButtonDisable"
-        @click="saveNewExpenses"
+        size="md"
+        color="primary"
+        :label="languageDataStore.getLanguageText('cancel')"
+        style="width:100%;"
+        @click="onCancel"
       />
     </div>
-  </div>
-  <div class="row q-mx-sm q-mt-sm">
-    <div class="col">
-      <hr class="line-separator-2">
+    <div class="col-sm-2 col-5 q-px-sm">
+      <q-btn
+        no-caps
+        outline
+        size="md"
+        color="primary"
+        :label="languageDataStore.getLanguageText('ok')"
+        :disable="isSaveButtonDisable"
+        style="width:100%;"
+        @click="onOk"
+      />
     </div>
   </div>
 </template>
