@@ -12,7 +12,7 @@ export default {
         "menu": "Menü",
         "menuShowExpenses": "Ausgaben anzeigen",
         "menuEditCategory": "Kategorie-Editor",
-        "menuEditCategoryComposition": "Kategoriezusammensetzungs-Editor ",
+        "menuEditCategoryComposition": "Kategorienzusammensetzungs-Editor ",
 
         "tooltipAddExpenses": "Ausgabe hinzufügen",
         "labelExpensesPeriod": "Wähle Ausgabenzeitraum",
@@ -42,5 +42,10 @@ export default {
         "editCategoryVadidationLength": "Bitte verwende mindestens 2 Zeichen",
         "editCategoryVadidationLetterFirst": "Kategoriename muss mit einem Buchstaben beginnen",
         "editCategoryVadidationAlreadyAvailable": "Kategoriename ist bereits vorhanden",
+
+        "editCategoryCompositionLabel": "Neue Kategorienzusammenstellung",
+        "editCategoryCompositionSubmitButton": "Neue Kategorienzusammenstellung speichern",
+        "editCategoryCompositionVadidationNoChoice": "Mindestens eine Kategorie auswählen",
+        "editCategoryCompositionVadidationAlreadyAvailable": "Kategoriezusammenstellung ist bereits vorhanden",
     }
 };

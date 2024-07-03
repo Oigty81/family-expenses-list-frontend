@@ -43,6 +43,11 @@ export default {
         "editCategoryVadidationLetterFirst": "Category name must start with a letter",
         "editCategoryVadidationAlreadyAvailable": "Category name is already available",
 
+        "editCategoryCompositionLabel": "New category composition",
+        "editCategoryCompositionSubmitButton": "Save new category composition",
+        "editCategoryCompositionVadidationNoChoice": "Choose at least one category",
+        "editCategoryCompositionVadidationAlreadyAvailable": "Category composition is already available",
+
 
     }
 };
