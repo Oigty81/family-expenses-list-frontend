@@ -8,7 +8,7 @@ export default {
         "password": "Password",
         "ok": "OK",
         "cancel": "Cancel",
-        
+
         "menu": "Menu",
         "menuShowExpenses": "Show Expenses",
         "menuEditCategory": "Edit Category",
@@ -18,6 +18,10 @@ export default {
         "labelExpensesPeriod": "select expenses period",
         "labelCategorySelector": "select categories",
         "labelMetatextFilter" : "search for metatext",
+
+        "tooltipDeleteExpenses": "delete expenses",
+        "confirmDeleteExpensesHeader": "Warning",
+        "confirmDeleteExpenses": "Do you really want do delete this expenses entry?",
 
         "dlgAddExpenses": "Add Expenses",
         "labelAddCategoryComposition": "Add Category Composition",

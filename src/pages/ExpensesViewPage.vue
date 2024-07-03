@@ -72,6 +72,18 @@ const onUpdateCreated = async ($e) => {
   loadExpensesListDebounced();
 };
 
+const onDeleteExpenses = async ($e) => {
+  $q.dialog({
+        title: languageDataStore.getLanguageText('confirmDeleteExpensesHeader'),
+        message: languageDataStore.getLanguageText('confirmDeleteExpenses'),
+        ok: languageDataStore.getLanguageText('ok'),
+        cancel: languageDataStore.getLanguageText('cancel')
+      }).onOk(async () => {
+        await expensesDataStore.deleteExpenses($e);
+        loadExpensesListDebounced();
+      });
+};
+
 </script>
 
 <template>
@@ -95,6 +107,7 @@ const onUpdateCreated = async ($e) => {
         :expenses-data="expensesDataStore.expensesForTableView"
         :table-height="uiStore.heightExpensesList"
         @update-created="onUpdateCreated"
+        @delete-expenses="onDeleteExpenses"
       />
     </div>
   </div>

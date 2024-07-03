@@ -19,6 +19,10 @@ export default {
         "labelCategorySelector": "Wähle Kategorien",
         "labelMetatextFilter" : "Suche nach Metatext",
 
+        "tooltipDeleteExpenses": "Ausgabe löschen",
+        "confirmDeleteExpensesHeader": "Achtung",
+        "confirmDeleteExpenses": "Möchten Sie diesen Ausgabeneintrag wirklich löschen?",
+
         "dlgAddExpenses": "Ausgabe hinzufügen",
         "labelAddCategoryComposition": "Kategoriezusammensetzung hinzufügen",
         "labelChooseDatetimeExpenses": "Datum/Uhrzeit für Ausgaben auswählen",

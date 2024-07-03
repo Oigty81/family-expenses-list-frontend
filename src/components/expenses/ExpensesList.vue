@@ -1,8 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-import moment from 'moment';
-
+import { useAppStateStore  } from '@/stores/appState';
 import { useLanguageDataStore  } from '@/stores/languageData';
 
 import CustomDataTimeSelector from '@components/ui/CustomDataTimeSelector.vue';
@@ -22,6 +21,7 @@ defineProps({
     },
 });
 
+const appStateStore = useAppStateStore();
 const languageDataStore = useLanguageDataStore();
 
 const pagination = ref({
@@ -126,6 +126,29 @@ const columns = ref([
                 });
               }"
             />
+          </q-td>
+        </template>
+        <template #body-cell-controls="props">
+          <q-td
+          class="text-left"
+          style="width: 80px;"
+          >
+            <q-btn
+              outline
+              no-caps
+              size="md"
+              color="primary"
+              @click.stop="emit('deleteExpenses', props.row.id);"
+            >
+              <i class="fa-solid fa-trash"></i>
+              <q-tooltip
+                class="tooltip-1"
+                :delay="appStateStore.tooltipDelay"
+                anchor="bottom left"
+              >
+                {{ languageDataStore.getLanguageText('tooltipDeleteExpenses') }}
+              </q-tooltip>
+            </q-btn>
           </q-td>
         </template>
       </q-table>
