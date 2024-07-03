@@ -3,6 +3,7 @@ import { ref, computed } from 'vue';
 
 import { useAppStateStore  } from '@/stores/appState';
 import { useLanguageDataStore  } from '@/stores/languageData';
+import { useExpensesDataStore  } from '@/stores/expensesData.js';
 
 import CustomDataTimeSelector from '@components/ui/CustomDataTimeSelector.vue';
 import ExpensesListEditPrice from '@components/expenses/ExpensesListEditPrice.vue';
@@ -13,10 +14,6 @@ const emit = defineEmits([
 ]);
 
 defineProps({
-    expensesData: { type: Array, required: true, default: () => {
-            return [ ];
-        }
-    },
     tableHeight: { type: Number, required: false, default: () => {
         return 240;
       }
@@ -25,6 +22,7 @@ defineProps({
 
 const appStateStore = useAppStateStore();
 const languageDataStore = useLanguageDataStore();
+const expensesDataStore  = useExpensesDataStore();
 
 const pagination = ref({
         page: 1,
@@ -89,118 +87,120 @@ const columns = computed(() => [
 <template>
   <div class="row">
     <div class="col">
-      <q-table
-        v-if="expensesData.length !== undefined && expensesData.length > 1"
-        v-model:pagination="pagination"
-        class="this-q-table"
-        :style="{height: tableHeight +'px'}"
-        :rows="expensesData"
-        :columns="columns"
-        :hide-bottom="true"
-        row-key="name"
-      >
-        <template #header="props">
-          <q-tr :props="props">
-            <q-th
-              v-for="col in props.cols"
-              :key="col.name"
-              :props="props"
-              class="my-table-header"
+      <div v-if="expensesDataStore.expensesForTableView.length !== undefined && expensesDataStore.expensesForTableView.length > 0">
+        <q-table
+          v-model:pagination="pagination"
+          class="this-q-table"
+          :style="{height: tableHeight +'px'}"
+          :rows="expensesDataStore.expensesForTableView"
+          :columns="columns"
+          :hide-bottom="true"
+          row-key="name"
+        >
+          <template #header="props">
+            <q-tr :props="props">
+              <q-th
+                v-for="col in props.cols"
+                :key="col.name"
+                :props="props"
+                class="my-table-header"
+              >
+                {{ col.label }}
+              </q-th>
+            </q-tr>
+          </template>
+          <template #body-cell-price="props">
+            <q-td
+            class="text-left"
             >
-              {{ col.label }}
-            </q-th>
-          </q-tr>
-        </template>
-        <template #body-cell-price="props">
-          <q-td
-          class="text-left"
-          >
-            {{ props.row.price }}
-            <i class="q-ml-sm fa-solid fa-pencil">
-              <q-popup-edit
-                v-slot="scope"
-                class="popup-edit"
-              >
-                <ExpensesListEditPrice
-                  :current-price="props.row.priceRaw"
-                  @update-price="($e) => {
-                    emit('updatePrice', {
-                      id: props.row.id,
-                      price: $e
-                    });
-                    scope.set();
-                  }"
-                />
-              </q-popup-edit>
-            </i>
-            
-          </q-td>
-        </template>
-        <template #body-cell-created="props">
-          <q-td
-          class="text-left"
-          style="width: 200px;"
-          >
-            {{ languageDataStore.formatedDateTime('dt',props.row.created) }}
-            <CustomDataTimeSelector
-              :initial-date-time="props.row.created"
-              @update="($e) => {
-                emit('updateCreated', {
-                  id: props.row.id,
-                  created: $e
-                });
-              }"
-            />
-          </q-td>
-        </template>
-        <template #body-cell-metatext="props">
-          <q-td
-          class="text-left"
-          >
-            {{ props.row.metatext }}
-            <i class="q-ml-sm fa-solid fa-pencil">
-              <q-popup-edit
-                v-slot="scope"
-                class="popup-edit"
-              >
-                <ExpensesListEditMetatext
-                  :current-metatext="props.row.metatext"
-                  @update-metatext="($e) => {
-                    emit('updateMetatext', {
-                      id: props.row.id,
-                      metatext: $e
-                    });
-                    scope.set();
-                  }"
-                />
-              </q-popup-edit>
-            </i>
-          </q-td>
-        </template>
-        <template #body-cell-controls="props">
-          <q-td
-          class="text-left"
-          style="width: 80px;"
-          >
-            <q-btn
-              outline
-              no-caps
-              size="md"
-              color="primary"
-              @click.stop="emit('deleteExpenses', props.row.id);"
+              {{ props.row.price }}
+              <i class="q-ml-sm fa-solid fa-pencil">
+                <q-popup-edit
+                  v-slot="scope"
+                  class="popup-edit"
+                >
+                  <ExpensesListEditPrice
+                    :current-price="props.row.priceRaw"
+                    @update-price="($e) => {
+                      emit('updatePrice', {
+                        id: props.row.id,
+                        price: $e
+                      });
+                      scope.set();
+                    }"
+                  />
+                </q-popup-edit>
+              </i>
+              
+            </q-td>
+          </template>
+          <template #body-cell-created="props">
+            <q-td
+            class="text-left"
+            style="width: 200px;"
             >
-              <i class="fa-solid fa-trash"></i>
-              <q-tooltip
-                class="tooltip-1"
-                :delay="appStateStore.tooltipDelay"
-                anchor="bottom left"
+              {{ languageDataStore.formatedDateTime('dt',props.row.created) }}
+              <CustomDataTimeSelector
+                :initial-date-time="props.row.created"
+                @update="($e) => {
+                  emit('updateCreated', {
+                    id: props.row.id,
+                    created: $e
+                  });
+                }"
+              />
+            </q-td>
+          </template>
+          <template #body-cell-metatext="props">
+            <q-td
+            class="text-left"
+            >
+              {{ props.row.metatext }}
+              <i class="q-ml-sm fa-solid fa-pencil">
+                <q-popup-edit
+                  v-slot="scope"
+                  class="popup-edit"
+                >
+                  <ExpensesListEditMetatext
+                    :current-metatext="props.row.metatext"
+                    @update-metatext="($e) => {
+                      emit('updateMetatext', {
+                        id: props.row.id,
+                        metatext: $e
+                      });
+                      scope.set();
+                    }"
+                  />
+                </q-popup-edit>
+              </i>
+            </q-td>
+          </template>
+          <template #body-cell-controls="props">
+            <q-td
+            class="text-left"
+            style="width: 80px;"
+            >
+              <q-btn
+                outline
+                no-caps
+                size="md"
+                color="primary"
+                @click.stop="emit('deleteExpenses', props.row.id);"
               >
-                {{ languageDataStore.getLanguageText('tooltipDeleteExpenses') }}
-              </q-tooltip>
-            </q-btn>
-          </q-td>
-        </template>
-      </q-table>
+                <i class="fa-solid fa-trash"></i>
+                <q-tooltip
+                  class="tooltip-1"
+                  :delay="appStateStore.tooltipDelay"
+                  anchor="bottom left"
+                >
+                  {{ languageDataStore.getLanguageText('tooltipDeleteExpenses') }}
+                </q-tooltip>
+              </q-btn>
+            </q-td>
+          </template>
+        </q-table>
+        <div class="text-h4 text-green text-right">{{ languageDataStore.getLanguageText('expensesListTotal') }}: {{ expensesDataStore.expensesSet.total.toFixed(2)}} € </div>
+      </div>
       <p v-else class="text-h4 text-red">
         {{ languageDataStore.getLanguageText('expensesListNoData') }}
       </p>

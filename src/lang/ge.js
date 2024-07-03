@@ -25,6 +25,7 @@ export default {
         "expensesListColumnCreated": "Erstellt am",
         "expensesListColumnMetatext": "Zusatzinfo",
         "expensesListNoData": "keine Ausgaben verfügbar.",
+        "expensesListTotal": "Gesamt",
 
         "tooltipDeleteExpenses": "Ausgabe löschen",
         "confirmDeleteExpensesHeader": "Achtung",

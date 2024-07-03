@@ -112,7 +112,6 @@ const onDeleteExpenses = async ($e) => {
   <div class="row q-mx-sm q-mt-sm">
     <div class="col">
       <ExpensesList
-        :expenses-data="expensesDataStore.expensesForTableView"
         :table-height="uiStore.heightExpensesList"
         @update-price="onUpdatePrice"
         @update-created="onUpdateCreated"

@@ -27,7 +27,7 @@ export const useExpensesDataStore = defineStore('expensesDataStore', () => {
                             id: e.id,
                             categoryCompositionText: categoryCompositionText,
                             displayname: e.displayname,
-                            price: e.price.toLocaleString() + " €",
+                            price: e.price.toFixed(2).toLocaleString() + " €",
                             priceRaw: e.price,
                             created: e.created,
                             metatext: e.metatext,
