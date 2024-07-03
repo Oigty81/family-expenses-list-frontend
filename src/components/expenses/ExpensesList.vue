@@ -5,6 +5,7 @@ import { useAppStateStore  } from '@/stores/appState';
 import { useLanguageDataStore  } from '@/stores/languageData';
 
 import CustomDataTimeSelector from '@components/ui/CustomDataTimeSelector.vue';
+import ExpensesListEditPrice from '@components/expenses/ExpensesListEditPrice.vue';
 import ExpensesListEditMetatext from '@components/expenses/ExpensesListEditMetatext.vue';
 
 const emit = defineEmits([
@@ -111,6 +112,31 @@ const columns = computed(() => [
               {{ col.label }}
             </q-th>
           </q-tr>
+        </template>
+        <template #body-cell-price="props">
+          <q-td
+          class="text-left"
+          >
+            {{ props.row.price }}
+            <i class="q-ml-sm fa-solid fa-pencil">
+              <q-popup-edit
+                v-slot="scope"
+                class="popup-edit"
+              >
+                <ExpensesListEditPrice
+                  :current-price="props.row.priceRaw"
+                  @update-price="($e) => {
+                    emit('updatePrice', {
+                      id: props.row.id,
+                      price: $e
+                    });
+                    scope.set();
+                  }"
+                />
+              </q-popup-edit>
+            </i>
+            
+          </q-td>
         </template>
         <template #body-cell-created="props">
           <q-td

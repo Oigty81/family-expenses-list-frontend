@@ -67,6 +67,11 @@ const onCloseAddExpenses = async ($e) => {
   loadExpensesListDebounced();
 };
 
+const onUpdatePrice = async ($e) => {
+  await expensesDataStore.updateExpenses($e.id, { price: $e.price });
+  loadExpensesListDebounced();
+};
+
 const onUpdateCreated = async ($e) => {
   await expensesDataStore.updateExpenses($e.id, { created: $e.created });
   loadExpensesListDebounced();
@@ -111,6 +116,7 @@ const onDeleteExpenses = async ($e) => {
       <ExpensesList
         :expenses-data="expensesDataStore.expensesForTableView"
         :table-height="uiStore.heightExpensesList"
+        @update-price="onUpdatePrice"
         @update-created="onUpdateCreated"
         @update-metatext="onUpdateMetatext"
         @delete-expenses="onDeleteExpenses"
