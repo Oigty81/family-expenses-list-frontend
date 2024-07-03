@@ -8,6 +8,8 @@ import { useAppStateStore  } from '@/stores/appState';
 import { useLanguageDataStore  } from '@/stores/languageData';
 import { useCategoriesDataStore } from '@/stores/categoriesData.js';
 
+import { compareTextArraysExact } from '@/utilities/text.js';
+
 const router = useRouter();
 
 const $q = useQuasar();
@@ -27,8 +29,8 @@ onMounted( async () => {
 
 const editCategoryCompositionSelectRules = computed(() => {
   return [
-    val => val.length > 0 || languageDataStore.getLanguageText('editCategoryCompositionVadidationNoChoice'),
-    val => !checkhetherCategoryCompositionIsAlreadyAvailable(val) || languageDataStore.getLanguageText('editCategoryCompositionVadidationAlreadyAvailable'),
+    val => val.length > 1 || languageDataStore.getLanguageText('editCategoryCompositionVadidationNoChoice'),
+    val => !checkWhetherCategoryCompositionIsAlreadyAvailable(val) || languageDataStore.getLanguageText('editCategoryCompositionVadidationAlreadyAvailable'),
   ];
 });
 
@@ -48,9 +50,19 @@ watch(appStateStore, () => {
   categoryCompositionSelectField.value.validate(); //NOTE: work around: update possible current validation error text when language was changed
 }, { deep: true });
 
-const checkhetherCategoryCompositionIsAlreadyAvailable = () => {
-  //TODO: implement it
-  return true;
+const checkWhetherCategoryCompositionIsAlreadyAvailable = (val) => {
+  let result = false;
+  const current = val.map(v => v.label);
+
+  categoriesDataStore.categoriesData.categoryCompositions.forEach(cc => {
+    let match = compareTextArraysExact(current, cc.categories);
+    if(match) {
+      result = true;
+    }
+    
+  });
+  
+  return result;
 };
 
 const saveNewCategoryComposition = async () => {
@@ -58,8 +70,8 @@ const saveNewCategoryComposition = async () => {
   if(categoryCompositionSelectField.value.hasError) return;
   
   try {
-    //await categoriesDataStore.putCategoryComposition(getModelIds.value);
-    //await router.push("/");
+    await categoriesDataStore.putCategoryComposition(getModelIds.value);
+    await router.push("/");
   } catch(ex) {
     model.value = [];
   }

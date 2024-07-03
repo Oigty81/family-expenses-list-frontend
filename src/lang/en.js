@@ -45,9 +45,7 @@ export default {
 
         "editCategoryCompositionLabel": "New category composition",
         "editCategoryCompositionSubmitButton": "Save new category composition",
-        "editCategoryCompositionVadidationNoChoice": "Choose at least one category",
+        "editCategoryCompositionVadidationNoChoice": "Choose at least two categories",
         "editCategoryCompositionVadidationAlreadyAvailable": "Category composition is already available",
-
-
     }
 };

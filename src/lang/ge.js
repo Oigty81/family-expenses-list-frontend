@@ -45,7 +45,7 @@ export default {
 
         "editCategoryCompositionLabel": "Neue Kategorienzusammenstellung",
         "editCategoryCompositionSubmitButton": "Neue Kategorienzusammenstellung speichern",
-        "editCategoryCompositionVadidationNoChoice": "Mindestens eine Kategorie auswählen",
+        "editCategoryCompositionVadidationNoChoice": "Mindestens zwei Kategorien auswählen",
         "editCategoryCompositionVadidationAlreadyAvailable": "Kategoriezusammenstellung ist bereits vorhanden",
     }
 };
