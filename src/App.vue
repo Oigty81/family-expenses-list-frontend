@@ -14,9 +14,11 @@ const utilitiesStore = useUtilitiesStore();
 
 userStore.setUserIsAuthenticatedWhenTokenIsAvailableAndValid();
 
+uiStore.widthViewport = window.innerWidth;
 uiStore.heightViewport = window.innerHeight;
 
 addEventListener("resize", () => {
+  uiStore.widthViewport = window.innerWidth;
   uiStore.heightViewport = window.innerHeight;
 });
 

@@ -3,6 +3,7 @@ import { ref, computed } from 'vue';
 
 export const useUiStore = defineStore('uiStore', () => {
 
+    const widthViewport = ref(0);
     const heightViewport = ref(0);
     const heightHeader = ref(56);
 
@@ -15,6 +16,6 @@ export const useUiStore = defineStore('uiStore', () => {
     });
     
     return {
-        heightViewport, heightHeader, heightContent, heightExpensesList
+        widthViewport, heightViewport, heightHeader, heightContent, heightExpensesList
     };
 });
