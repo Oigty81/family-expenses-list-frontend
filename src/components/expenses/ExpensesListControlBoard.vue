@@ -9,7 +9,7 @@ import { useAppStateStore  } from '@/stores/appState';
 import { useLanguageDataStore  } from '@/stores/languageData';
 import { useCategoriesDataStore } from '@/stores/categoriesData';
 
-const emit = defineEmits(['updateFilter']);
+const emit = defineEmits(['updateFilter', 'addExpenses']);
 
 const appStateStore = useAppStateStore();
 const languageDataStore = useLanguageDataStore();
@@ -24,7 +24,7 @@ let isUpdateInitial = true;
 
 onBeforeUpdate(() => {
     if(isUpdateInitial) {
-      dateRange.value = [moment().format('YYYY-MM-DD'), null]; //NOTE: set day filter initial
+      dateRange.value = [moment().startOf('month').format('YYYY-MM-DD'), moment().endOf('month').format('YYYY-MM-DD')]; //NOTE: set current month range initial
       isUpdateInitial = false;
     }
 });
@@ -71,22 +71,42 @@ const onChangeDatetimeRange = (e) => {
 </script>
 
 <template>
-  <div class="row q-ma-xs">
-    <div class="col-4 q-px-sm">
+  <div class="row">
+    <div class="col-lg-3 col-sm-6 col-12 q-mt-md q-px-sm">
+      <q-btn
+        outline
+        no-caps
+        class="q-mt-sm"
+        color="primary"
+        size="16px"
+        @click="() => { emit('addExpenses'); }"
+      >
+        <i class="fa-solid fa-file-circle-plus" />
+        <q-tooltip
+          class="tooltip-1"
+          :delay="appStateStore.tooltipDelay"
+          anchor="bottom right"
+        >
+          {{ languageDataStore.getLanguageText('tooltipAddExpenses') }}
+        </q-tooltip>
+      </q-btn>
+    </div>
+    <div class="col-lg-3 col-sm-6 col-12 q-mt-md q-px-sm">
       <CustomDateRange
-        :label="languageDataStore.getLanguageText('???')"
+        :label="languageDataStore.getLanguageText('labelExpensesPeriod')"
         :datetime-range-strings="dateRange"
         :position="{x: 20, y:180}"
         @update-date-range="($e) => { onChangeDatetimeRange($e); }"
       />
     </div>
-    <div class="col-4 q-px-sm">
+    <div class="col-lg-3 col-sm-6 col-12 q-mt-md q-px-sm">
       <q-select
         v-model="categoriesModel"
         filled
         multiple
+        stack-label
         :options="categoriesDataStore.categoryDataForSelector"
-        :label="languageDataStore.getLanguageText('???')"
+        :label="languageDataStore.getLanguageText('labelCategorySelector')"
       >
         <template #append>
           <q-icon
@@ -98,11 +118,12 @@ const onChangeDatetimeRange = (e) => {
         </template>
       </q-select>
     </div>
-    <div class="col-4 q-px-sm">
+    <div class="col-lg-3 col-sm-6 col-12 q-mt-md q-px-sm">
       <q-input
         v-model="metatextFilterModel"
         filled
-        :label="languageDataStore.getLanguageText('???')"
+        stack-label
+        :label="languageDataStore.getLanguageText('labelMetatextFilter')"
         :debounce="appStateStore.inputRequestDebounceTime"
       >
         <template #append>
@@ -117,3 +138,14 @@ const onChangeDatetimeRange = (e) => {
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+
+//display q-select content in single line
+:deep(.q-select) .q-field__native > span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+</style>
