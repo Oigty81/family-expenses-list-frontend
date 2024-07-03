@@ -11,7 +11,7 @@ const uiStore = useUiStore();
 const languageDataStore = useLanguageDataStore();
 
 const props = defineProps({
-    scheduledTime: { type: String, required: true, default: () => '2024-01-01 12:00' },
+    initialDateTime: { type: String, required: true, default: () => '2024-01-01 12:00' },
     label: { type: String, required: true, default: () => ''},
 });
 
@@ -41,7 +41,7 @@ const customPositionComputed = computed(() => {
 const refDatetimePickerCustomSlot = ref(null);
 
 watch(props, () => {
-  currentDateTime.value = moment(props.scheduledTime).toDate();
+  currentDateTime.value = moment(props.initialDateTime).toDate();
 }, { immediate: true, deep: false});
 
 

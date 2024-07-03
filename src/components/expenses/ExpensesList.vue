@@ -1,6 +1,16 @@
 <script setup>
 import { ref } from 'vue';
 
+import moment from 'moment';
+
+import { useLanguageDataStore  } from '@/stores/languageData';
+
+import CustomDataTimeSelector from '@components/ui/CustomDataTimeSelector.vue';
+
+const emit = defineEmits([
+  'updatePrice', 'updateCreated', 'updateMetatext', 'deleteExpenses',
+]);
+
 defineProps({
     expensesData: { type: Array, required: true, default: () => {
             return [ ];
@@ -12,9 +22,13 @@ defineProps({
     },
 });
 
+const languageDataStore = useLanguageDataStore();
+
 const pagination = ref({
         page: 1,
-        rowsPerPage: 0
+        rowsPerPage: 0,
+        sortBy: 'created',
+        descending: true,
       });
 
 const columns = ref([
@@ -40,7 +54,8 @@ const columns = ref([
         label: 'Price',
         align: 'left',
         field: 'price',
-        sortable: true
+        sortable: true,
+        sort: (a, b, rowA, rowB) => parseFloat(a).toFixed(2) - parseFloat(b).toFixed(2),
     },
     {
         name: 'created',
@@ -56,6 +71,13 @@ const columns = ref([
         label: 'Metatext',
         align: 'left',
         field: 'metatext',
+        sortable: false
+    },
+    {
+        name: 'controls',
+        required: true,
+        align: 'left',
+        field: 'controls',
         sortable: false
     },
 ]);
@@ -88,6 +110,23 @@ const columns = ref([
               {{ col.label }}
             </q-th>
           </q-tr>
+        </template>
+        <template #body-cell-created="props">
+          <q-td
+          class="text-left"
+          style="width: 200px;"
+          >
+            {{ languageDataStore.formatedDateTime('dt',props.row.created) }}
+            <CustomDataTimeSelector
+              :initial-date-time="props.row.created"
+              @update="($e)=> {
+                emit('updateCreated', {
+                  id: props.row.id,
+                  created: $e
+                });
+              }"
+            />
+          </q-td>
         </template>
       </q-table>
     </div>

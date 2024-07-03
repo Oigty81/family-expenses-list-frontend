@@ -63,8 +63,12 @@ const onAddExpenses = () => {
 
 const onCloseAddExpenses = async ($e) => {
   dlgAddExpensesVisible.value = false;
-  console.log('sdgsdg', $e);
   await expensesDataStore.putExpenses($e);
+  loadExpensesListDebounced();
+};
+
+const onUpdateCreated = async ($e) => {
+  await expensesDataStore.updateExpenses($e.id, { created: $e.created });
   loadExpensesListDebounced();
 };
 
@@ -90,6 +94,7 @@ const onCloseAddExpenses = async ($e) => {
       <ExpensesList
         :expenses-data="expensesDataStore.expensesForTableView"
         :table-height="uiStore.heightExpensesList"
+        @update-created="onUpdateCreated"
       />
     </div>
   </div>

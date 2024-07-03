@@ -24,6 +24,7 @@ export const useExpensesDataStore = defineStore('expensesDataStore', () => {
                         let categoryCompositionText = cc.categories.join(' / ');
                         
                         destObject.push({
+                            id: e.id,
                             categoryCompositionText: categoryCompositionText,
                             displayname: e.displayname,
                             price: e.price.toLocaleString() + " €",
