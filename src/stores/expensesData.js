@@ -56,9 +56,9 @@ export const useExpensesDataStore = defineStore('expensesDataStore', () => {
         });
     };
 
-    const putExpenses = async (categoryCompositionId, price, metatext) => {
+    const putExpenses = async (data) => {
         return new Promise((resolve, reject) => {
-            ajaxRequestAuthWithData("/expenses/putExpenses", 'POST', { categoryCompositionId: categoryCompositionId, price: price, metatext: metatext })
+            ajaxRequestAuthWithData("/expenses/putExpenses", 'POST', data)
             .then(() => {
                 resolve();
             })
