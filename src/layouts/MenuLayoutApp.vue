@@ -141,7 +141,7 @@ const onResize = (size) => {
           to="/"
         >
           <q-item-section>
-            <q-item-label>Show Expenses</q-item-label>
+            <q-item-label>{{ languageDataStore.getLanguageText('menuShowExpenses') }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -152,7 +152,7 @@ const onResize = (size) => {
           to="/edit-category"
         >
           <q-item-section>
-            <q-item-label>Edit Category</q-item-label>
+            <q-item-label>{{ languageDataStore.getLanguageText('menuEditCategory') }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -163,7 +163,7 @@ const onResize = (size) => {
           to="/edit-category-composition"
         >
           <q-item-section>
-            <q-item-label>Edit Category Composition</q-item-label>
+            <q-item-label>{{ languageDataStore.getLanguageText('menuEditCategoryComposition') }}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -171,7 +171,7 @@ const onResize = (size) => {
   
     <q-page-container
       id="main-content-el"
-      style="overflow-x: hidden; overflow-y: auto;"
+      style="overflow-x: hidden; overflow-y: hidden;"
       :style="{'max-height': uiStore.heightContent + 'px'}"
     >
       <router-view />

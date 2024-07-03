@@ -8,13 +8,17 @@ export default {
         "password": "Password",
         "ok": "OK",
         "cancel": "Cancel",
+        
         "menu": "Menu",
-        "edit": "Edit",
-        "save": "Save",
+        "menuShowExpenses": "Show Expenses",
+        "menuEditCategory": "Edit Category",
+        "menuEditCategoryComposition": "Edit Category Composition",
+
         "tooltipAddExpenses": "add expenses",
         "labelExpensesPeriod": "select expenses period",
         "labelCategorySelector": "select categories",
         "labelMetatextFilter" : "search for metatext",
+
         "dlgAddExpenses": "Add Expenses",
         "labelAddCategoryComposition": "Add Category Composition",
         "labelChooseDatetimeExpenses": "Choose Datetime for Expenses",

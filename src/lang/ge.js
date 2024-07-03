@@ -8,13 +8,17 @@ export default {
         "password": "Passwort",
         "ok": "OK",
         "cancel": "Abbrechen",
+
         "menu": "Menü",
-        "edit": "Editieren",
-        "save": "Speichern",
+        "menuShowExpenses": "Ausgaben anzeigen",
+        "menuEditCategory": "Kategorie-Editor",
+        "menuEditCategoryComposition": "Kategoriezusammensetzungs-Editor ",
+
         "tooltipAddExpenses": "Ausgabe hinzufügen",
         "labelExpensesPeriod": "Wähle Ausgabenzeitraum",
         "labelCategorySelector": "Wähle Kategorien",
         "labelMetatextFilter" : "Suche nach Metatext",
+
         "dlgAddExpenses": "Ausgabe hinzufügen",
         "labelAddCategoryComposition": "Kategoriezusammensetzung hinzufügen",
         "labelChooseDatetimeExpenses": "Datum/Uhrzeit für Ausgaben auswählen",
