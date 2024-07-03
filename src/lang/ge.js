@@ -36,5 +36,11 @@ export default {
         "labelChooseDatetimeExpenses": "Datum/Uhrzeit für Ausgaben auswählen",
         "labeAddPrice": "Preis hinzufügen (€)",
         "labelAddInfo": "Info bzw. Metatext hinzufügen",
+
+        "editCategoryLabel": "Neue Kategorie",
+        "editCategorySubmitButton": "Neue Kategorie speichern",
+        "editCategoryVadidationLength": "Bitte verwende mindestens 2 Zeichen",
+        "editCategoryVadidationLetterFirst": "Kategoriename muss mit einem Buchstaben beginnen",
+        "editCategoryVadidationAlreadyAvailable": "Kategoriename ist bereits vorhanden",
     }
 };

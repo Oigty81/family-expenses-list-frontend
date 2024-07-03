@@ -36,5 +36,13 @@ export default {
         "labelChooseDatetimeExpenses": "Choose Datetime for Expenses",
         "labeAddPrice": "Add Price (€)",
         "labelAddInfo": "Add Info / Metatext",
+
+        "editCategoryLabel": "New Category",
+        "editCategorySubmitButton": "Save new category",
+        "editCategoryVadidationLength": "Please use minimum 2 characters",
+        "editCategoryVadidationLetterFirst": "Category name must start with a letter",
+        "editCategoryVadidationAlreadyAvailable": "Category name is already available",
+
+
     }
 };

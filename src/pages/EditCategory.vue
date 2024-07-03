@@ -1,8 +1,10 @@
 <script setup>
-import { ref, watch, onMounted } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
 
+import { useAppStateStore  } from '@/stores/appState';
+import { useLanguageDataStore  } from '@/stores/languageData';
 import { useCategoriesDataStore } from '@/stores/categoriesData.js';
 
 import { characterIsLetter } from '@/utilities/text.js';
@@ -11,13 +13,12 @@ const router = useRouter();
 
 const $q = useQuasar();
 
+const appStateStore = useAppStateStore();
+const languageDataStore = useLanguageDataStore();
 const categoriesDataStore  = useCategoriesDataStore();
 
+const categoryInputField = ref(null);
 const categoryName = ref("");
-const errorMessage = ref("");
-const validationMessage = ref("");
-const isValidCategoryName = ref(false);
-
 
 onMounted( async () => {
   $q.loading.show();
@@ -25,78 +26,71 @@ onMounted( async () => {
   $q.loading.hide();
 });
 
+const editCategoryInputRules = computed(() => {
+  return [
+    val => val.length > 1 || languageDataStore.getLanguageText('editCategoryVadidationLength'),
+    val => characterIsLetter(val[0]) || languageDataStore.getLanguageText('editCategoryVadidationLetterFirst'),
+    val => !checkhetherCategorynameIsAlreadyAvailable(val) || languageDataStore.getLanguageText('editCategoryVadidationAlreadyAvailable')
+  ];
+});
 
-const checkCategorynameWhetherIsAlreadyAvailable = () => {
-  return new Promise((resolve, reject) => {
-    categoriesDataStore.categoriesData.categories.forEach(c => {
-      if(c.title.toLowerCase() === categoryName.value.toLowerCase()) {
-        reject({ text: "Category name is already available"});
+watch(appStateStore, () => {
+  categoryInputField.value.validate(); //NOTE: work around: update possible current validation error text when language was changed
+}, { deep: true });
+
+const checkhetherCategorynameIsAlreadyAvailable = (val) => {
+  let result = false;
+  categoriesDataStore.categoriesData.categories.forEach(c => {
+      if(c.title.toLowerCase() === val.toLowerCase()) {
+        result = true;
       }
-    });
-    resolve();
   });
+  return result;
 };
 
 const saveNewCategory = async () => {
-  errorMessage.value = "";
+  categoryInputField.value.validate();
+  if(categoryInputField.value.hasError) return;
+
   try {
-    await checkCategorynameWhetherIsAlreadyAvailable();
     await categoriesDataStore.putCategory(categoryName.value);
     await router.push("/");
   } catch(ex) {
-    errorMessage.value = ex.text;
     categoryName.value = "";
   }
 };
 
-watch(categoryName, (v) => {
-    validationMessage.value = "";
-    isValidCategoryName.value = true;
-
-    if(v === "") {
-      isValidCategoryName.value = false;
-      return;
-    }
-    if(!characterIsLetter(v[0])) {
-      validationMessage.value = "category name must start with a letter";
-      isValidCategoryName.value = false;
-      return;
-    }
-  }, {deep: false, immediate: false }
-);
-
 </script>
 
 <template>
+  <div class="row q-mx-sm q-mt-sm">
+    <div class="col">
+      <div class="text-h4">{{ languageDataStore.getLanguageText('menuEditCategory') }}</div>
+    </div>
+  </div>
   <div class="row q-mx-sm q-mt-xl">
-    <div class="col-md-4">
+    <div class="col-md-4 col-12 q-mb-sm q-pr-sm">
       <q-input
+        ref="categoryInputField"
         v-model="categoryName"
         outlined
         class="my-q-add-category"
-        label="Add Category"
+        :label="languageDataStore.getLanguageText('editCategoryLabel')"
         stack-label
-        :hint="validationMessage"
+        :rules="editCategoryInputRules"
+        lazy-rules="ondemand"
       />
     </div>
-    <div class="col-md-2">
+    <div class="col-md-4 col-12 q-pr-sm">
       <q-btn
         no-caps
         style="width: 100%"
         outline
-        class="q-pa-md q-ml-md"
-        label="Save new category"
+        class="q-py-md"
+        :label="languageDataStore.getLanguageText('editCategorySubmitButton')"
         color="info"
-        :disable="!isValidCategoryName"
         @click="saveNewCategory"
       />
-    </div>
-  </div>
-  <div class="row q-mx-sm">
-    <div class="col-4">
-      <h5 class="text-red">
-        {{ errorMessage }}
-      </h5>
     </div>
   </div>
   <div class="row q-mx-sm q-mt-sm">
