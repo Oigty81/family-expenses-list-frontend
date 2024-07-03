@@ -90,6 +90,7 @@ const columns = computed(() => [
   <div class="row">
     <div class="col">
       <q-table
+        v-if="expensesData.length !== undefined && expensesData.length > 1"
         v-model:pagination="pagination"
         class="this-q-table"
         :style="{height: tableHeight +'px'}"
@@ -97,9 +98,6 @@ const columns = computed(() => [
         :columns="columns"
         :hide-bottom="true"
         row-key="name"
-        :rows-per-page-options="[0]"
-        virtual-scroll
-        :virtual-scroll-item-size="4"
       >
         <template #header="props">
           <q-tr :props="props">
@@ -177,7 +175,6 @@ const columns = computed(() => [
                 />
               </q-popup-edit>
             </i>
-            
           </q-td>
         </template>
         <template #body-cell-controls="props">
@@ -204,6 +201,9 @@ const columns = computed(() => [
           </q-td>
         </template>
       </q-table>
+      <p v-else class="text-h4 text-red">
+        {{ languageDataStore.getLanguageText('expensesListNoData') }}
+      </p>
     </div>
   </div>
 </template>
