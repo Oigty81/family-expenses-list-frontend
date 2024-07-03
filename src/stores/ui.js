@@ -11,11 +11,14 @@ export const useUiStore = defineStore('uiStore', () => {
         return heightViewport.value - heightHeader.value  + 40;
     });
 
+    const heightExpensesListControlBoard = ref(0);
+
     const heightExpensesList = computed(() => {
-        return heightContent.value - 220;
+        return heightContent.value - heightExpensesListControlBoard.value - 100;
     });
     
     return {
-        widthViewport, heightViewport, heightHeader, heightContent, heightExpensesList
+        widthViewport, heightViewport, heightHeader, heightContent,
+        heightExpensesListControlBoard, heightExpensesList
     };
 });
