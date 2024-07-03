@@ -1,9 +1,13 @@
 <script setup>
 import {ref, computed, watch, onMounted } from "vue";
+
+import { useUiStore  } from '@/stores/ui';
 import { useLanguageDataStore  } from '@/stores/languageData';
+
 import moment from 'moment';
 import Datepicker from '@vuepic/vue-datepicker';
 
+const uiStore = useUiStore();
 const languageDataStore = useLanguageDataStore();
 
 const props = defineProps({
@@ -24,6 +28,9 @@ const customPositionComputed = computed(() => {
   if(dtComponentPosition.value === null || pos === undefined) {
     return { top: 0, left: 0 };
   }
+  
+  let dummyCall = uiStore.widthViewport; //NOTE: force to call this computed property when viewport width was resized
+  
   return { top: pos.y + (pos.height / 2) - 200 + props.position.y, left: pos.x + props.position.x};
 });
 
