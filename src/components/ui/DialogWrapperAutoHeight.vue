@@ -96,7 +96,7 @@ const styleContent = computed(() => {
   >
     <q-resize-observer @resize="onResizeDialog" />
     <q-card
-      style="max-width: 90vw;overflow: hidden !important;"
+      style="max-width: 99vw;overflow: hidden !important;"
       :style="{...dialogTranslation, minHeight: props.minHeight + 'px' }"
     >
       <q-card-section
@@ -125,7 +125,9 @@ const styleContent = computed(() => {
       <q-card-section
         :style="styleContent"
       >
-        <slot />
+        <div style="width: 88vw;">
+          <slot />
+        </div>
         <q-resize-observer @resize="onResizeContent" />
       </q-card-section>
     </q-card>
