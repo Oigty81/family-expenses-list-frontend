@@ -125,6 +125,7 @@ const currentDateRangeFormatedDE = computed(() => {
         <q-input
           v-model="currentDateRangeFormatedDE"
           filled
+          stack-label
           :label="label"
           readonly
           class="q-mb-md input-field"
