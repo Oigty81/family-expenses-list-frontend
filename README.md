@@ -3,7 +3,9 @@
 ### My intention for creating this project: 
 All members of family can store their expenses at one place.
 
-They also can filter and show the whole expenses at any time. 
+Everyone can show the whole expenses at any time.
+
+Filters can be set by categories, time periods and metatext.
 
 
 ![](./docs/pagedemo.gif)
@@ -15,9 +17,12 @@ link to the associated backend project [click here](https://github.com/Oigty81/f
 #
 ### todo
 
-- [ ] add category filter option for show expenses
+- [x] add category and metatext filter option for show expenses
+- [x] add multi language support (en/ge)
 - [ ] add a PDF-Export feature
-- [ ] add language support
+- [ ] add unit tests for all components
+- [ ] add list-view for category and category composition
+- [ ] add an update/delete feature for categories and category composition that are not yet in use
 
 # 
 ## Project setup
