@@ -1,6 +1,6 @@
 import { describe, expect, test} from "vitest";
 
-import { characterIsLetter } from '@/utilities/text';
+import { characterIsLetter, compareTextArraysExact } from '@/utilities/text';
 
 describe('test "utilities/text"', () => {
 
@@ -29,4 +29,36 @@ describe('test "utilities/text"', () => {
         expect(result1).toBe(false);
         expect(result2).toBe(false);
     });
+
+
+    test('whether method compareTextArraysExact returns true when text array contains the same elements', () => {
+        const result1 = compareTextArraysExact(
+            [ "AAA", "BBB", "CCC", "AbcD" ],
+            [ "AAA", "BBB", "CCC", "AbcD" ],
+        );
+
+        const result2 = compareTextArraysExact(
+            [ "AAA", "BBB", "CCC", "ABCD" ],
+            [ "BBB", "ABCD", "CCC", "AAA" ],
+        );
+
+        expect(result1).toBe(true);
+        expect(result2).toBe(true);
+    });
+
+    test('whether method compareTextArraysExact returns false when text array contains not the same elements', () => {
+        const result1 = compareTextArraysExact(
+            [ "AAA", "BBB", "CCC", "AbcD" ],
+            [ "AAA", "BBB", "CCC" ],
+        );
+
+        const result2 = compareTextArraysExact(
+            [ "AAA", "CCC" ],
+            [ "AAA", "BBB", "CCC" ],
+        );
+
+        expect(result1).toBe(false);
+        expect(result2).toBe(false);
+    });
+
 });
