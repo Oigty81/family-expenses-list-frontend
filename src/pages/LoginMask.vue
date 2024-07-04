@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { useQuasar } from 'quasar';
 
 import { useRouter } from 'vue-router';
 
@@ -9,6 +10,7 @@ import { useUtilitiesStore } from '../stores/utilities.js';
 
 import LanguageSelector from "@components/ui/LanguageSelector.vue";
 
+const $q = useQuasar();
 const router = useRouter();
 const userStore = useUserStore();
 const languageDataStore  = useLanguageDataStore();
@@ -23,6 +25,10 @@ onMounted(() => {
   if(import.meta.env.VITE_LOCAL_USE_FOR.toLowerCase() === 'app') {
     appMode.value = true;
   }
+});
+
+const headerFontSize = computed(()=> {
+  return $q.screen.lt.md ? '1.3rem' : '2.1rem';
 });
 
 const clickLogin = async () => {
@@ -54,15 +60,15 @@ const clickCloseApp = async () => {
   <div class="fullscreen bg-white text-white text-center q-pa-md">
     <q-layout view="lHh Lpr lFf">
       <q-page-container>
-        <q-page class="flex flex-center bg-grey-5">
+        <q-page class="flex flex-center bg-grey-3">
           <q-card
-            class="q-pa-md shadow-2"
-            style="min-width: 640px;"
+            class="q-pa-sm q-ma-xs shadow-2"
+            style="min-width: 370px; width: 600px"
             bordered
           >
             <q-card-section class="text-center">
               <div class="row">
-                <div class="col-3">
+                <div class="col text-left">
                   <q-avatar style="position: relative;">
                     <img
                       src="../assets/logo.png"
@@ -70,12 +76,15 @@ const clickCloseApp = async () => {
                     >
                   </q-avatar>
                 </div>
-                <div class="col-7">
-                  <div class="text-grey-9 text-h5 text-weight-bold">
+                <div class="col text-center q-my-auto">
+                  <div
+                    class="text-grey-9 text-weight-bold"
+                    :style="{ fontSize: headerFontSize }"
+                  >
                     {{ languageDataStore.getLanguageText('singIn') }}
                   </div>
                 </div>
-                <div class="col-2 text-left">
+                <div class="col text-right">
                   <LanguageSelector />
                 </div>
               </div>

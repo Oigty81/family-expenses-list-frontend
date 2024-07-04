@@ -104,12 +104,7 @@ const onDeleteExpenses = async ($e) => {
       <q-resize-observer @resize="onResizeExpensesListControlBoard" />
     </div>
   </div>
-  <div class="row q-mx-sm q-my-xs">
-    <div class="col">
-      <hr class="line-separator-2">
-    </div>
-  </div>
-  <div class="row q-mx-sm q-mt-sm">
+  <div class="row q-mx-sm q-mt-xs">
     <div class="col">
       <ExpensesList
         :table-height="uiStore.heightExpensesList"

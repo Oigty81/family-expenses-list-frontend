@@ -14,7 +14,7 @@ export const useUiStore = defineStore('uiStore', () => {
     const heightExpensesListControlBoard = ref(0);
 
     const heightExpensesList = computed(() => {
-        return heightContent.value - heightExpensesListControlBoard.value - 130;
+        return heightContent.value - heightExpensesListControlBoard.value - 85;
     });
     
     return {

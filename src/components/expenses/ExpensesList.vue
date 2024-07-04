@@ -199,7 +199,7 @@ const columns = computed(() => [
             </q-td>
           </template>
         </q-table>
-        <div class="text-h4 text-green text-right">{{ languageDataStore.getLanguageText('expensesListTotal') }}: {{ expensesDataStore.expensesSet.total.toFixed(2)}} € </div>
+        <div class="text-h6 text-green text-right">{{ languageDataStore.getLanguageText('expensesListTotal') }}: {{ expensesDataStore.expensesSet.total.toFixed(2)}} € </div>
       </div>
       <p v-else class="text-h4 text-red">
         {{ languageDataStore.getLanguageText('expensesListNoData') }}

@@ -72,7 +72,7 @@ const onChangeDatetimeRange = (e) => {
 
 <template>
   <div class="row">
-    <div class="col-lg-3 col-sm-6 col-12 q-mt-md q-px-sm">
+    <div class="col-sm-3 col-12 q-mt-xs q-px-sm">
       <q-btn
         outline
         no-caps
@@ -91,7 +91,7 @@ const onChangeDatetimeRange = (e) => {
         </q-tooltip>
       </q-btn>
     </div>
-    <div class="col-lg-3 col-sm-6 col-12 q-mt-md q-px-sm">
+    <div class="col-sm-3 col-12 q-mt-xs q-px-sm">
       <CustomDateRange
         :label="languageDataStore.getLanguageText('labelExpensesPeriod')"
         :datetime-range-strings="dateRange"
@@ -99,7 +99,7 @@ const onChangeDatetimeRange = (e) => {
         @update-date-range="($e) => { onChangeDatetimeRange($e); }"
       />
     </div>
-    <div class="col-lg-3 col-sm-6 col-12 q-mt-md q-px-sm">
+    <div class="col-sm-3 col-12 q-mt-xs q-px-sm">
       <q-select
         v-model="categoriesModel"
         filled
@@ -118,7 +118,7 @@ const onChangeDatetimeRange = (e) => {
         </template>
       </q-select>
     </div>
-    <div class="col-lg-3 col-sm-6 col-12 q-mt-md q-px-sm">
+    <div class="col-sm-3 col-12 q-mt-xs q-px-sm">
       <q-input
         v-model="metatextFilterModel"
         filled
