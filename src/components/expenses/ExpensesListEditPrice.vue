@@ -20,6 +20,7 @@ const price = useCurrencyInput({ currency: 'EUR' });
 onMounted(() => {
     setTimeout(() => {
         price.setValue(props.currentPrice);
+        price.inputRef.value.focus();
     }, 100);
 });
 
@@ -35,7 +36,7 @@ onMounted(() => {
         :ref="price.inputRef"
         v-model="price.formattedValue"
         class="q-mt-sm q-ml-sm "
-        filled
+        @keydown.enter.prevent="emit('updatePrice', price.numberValue._value);"
       />
     </div>
     <div class="col-1">

@@ -14,10 +14,14 @@ const props = defineProps({
     },
 });
 
+const inputRef = ref(null);
 const metatext = ref('');
 
 onMounted(() => {
-    metatext.value = props.currentMetatext;
+    setTimeout(()=> {
+      metatext.value = props.currentMetatext;
+      inputRef.value.focus();
+    }, 100);
 });
 
 </script>
@@ -29,9 +33,10 @@ onMounted(() => {
   >
     <div class="col-10 q-pb-sm">
       <q-input
+        ref="inputRef"
         v-model="metatext"
         class="q-mt-sm q-ml-sm "
-        filled
+        @keydown.enter.prevent="emit('updateMetatext', metatext);"
       />
     </div>
     <div class="col-1">
