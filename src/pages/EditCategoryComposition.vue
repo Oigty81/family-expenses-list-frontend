@@ -47,7 +47,9 @@ const getModelIds = computed(()=> {
 });
 
 watch(appStateStore, () => {
-  categoryCompositionSelectField.value.validate(); //NOTE: work around: update possible current validation error text when language was changed
+  if(categoryCompositionSelectField.value.hasError) {
+    categoryCompositionSelectField.value.validate(); //NOTE: work around: update possible current validation error text when language was changed
+  }
 }, { deep: true });
 
 const checkWhetherCategoryCompositionIsAlreadyAvailable = (val) => {

@@ -35,7 +35,9 @@ const editCategoryInputRules = computed(() => {
 });
 
 watch(appStateStore, () => {
-  categoryInputField.value.validate(); //NOTE: work around: update possible current validation error text when language was changed
+  if(categoryInputField.value.hasError) {
+    categoryInputField.value.validate(); //NOTE: work around: update possible current validation error text when language was changed
+  }
 }, { deep: true });
 
 const checkhetherCategorynameIsAlreadyAvailable = (val) => {
