@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useQuasar } from 'quasar';
 
 import { useUiStore } from '@/stores/ui.js';
 import { useLanguageDataStore } from '@/stores/languageData.js';
@@ -8,12 +9,22 @@ import { useUtilitiesStore } from '../stores/utilities.js';
 
 import LanguageSelector from "@components/ui/LanguageSelector.vue";
 
+const $q = useQuasar();
+
 const uiStore = useUiStore();
 const languageDataStore  = useLanguageDataStore();
 const userStore = useUserStore();
 const utilitiesStore = useUtilitiesStore();
 
 const leftDrawerOpen = ref(false);
+
+const containerStyle = computed(() => {
+  return {
+    'max-height': uiStore.heightContent + 'px',
+    'overflow-x': 'hidden',
+    'overflow-y': $q.screen.lt.md ? 'auto' : 'hidden'
+  };
+});
 
 const toggleLeftDrawer = () => {
         leftDrawerOpen.value = !leftDrawerOpen.value;
@@ -164,7 +175,7 @@ const onCloseMenu = () => {
     <q-page-container
       id="main-content-el"
       style="overflow-x: hidden; overflow-y: hidden;"
-      :style="{'max-height': uiStore.heightContent + 'px'}"
+      :style="containerStyle"
     >
       <router-view />
     </q-page-container>
