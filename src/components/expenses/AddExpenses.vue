@@ -83,7 +83,7 @@ const onOk = () => {
     </div>
   </div>
   <div class="row q-mt-lg">
-    <div class="col-sm-2 col-5 offset-sm-8 q-pr-sm">
+    <div class="col-sm-2 col-6 offset-sm-8 q-pr-sm">
       <q-btn
         no-caps
         outline
@@ -94,7 +94,7 @@ const onOk = () => {
         @click="onCancel"
       />
     </div>
-    <div class="col-sm-2 col-5 q-px-sm">
+    <div class="col-sm-2 col-6 q-px-sm">
       <q-btn
         no-caps
         outline

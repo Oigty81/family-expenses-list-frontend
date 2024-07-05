@@ -118,6 +118,8 @@ const onDeleteExpenses = async ($e) => {
   <DialogWrapperAutoHeight
     :title="languageDataStore.getLanguageText('dlgAddExpenses')"
     :visible="dlgAddExpensesVisible"
+    :full="true"
+    :draggable="true"
     @dialog-closed="() => {
       dlgAddExpensesVisible = false;
     }"

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
+import { useQuasar } from 'quasar';
 
 const props = defineProps({
     title: { type: String, required: false, default: () => {
@@ -30,8 +31,14 @@ const props = defineProps({
 
 const emit = defineEmits(['dialogClosed']);
 
+const $q = useQuasar();
+
 const isVisible = ref(false);
 const dialogPosition = ref({x: 0, y: 0});
+
+const headerFontSize = computed(()=> {
+  return $q.screen.lt.sm ? '0.8rem' : '1.4rem';
+});
 
 const dialogTranslation = computed(() => {
   return {
@@ -106,10 +113,16 @@ const styleContent = computed(() => {
       >
         <div
           v-if="title.length > 0"
-          class="text-h6 non-selectable"
+          class="text-center q-my-auto non-selectable"
         >
-          {{ title }}
+          <div
+            class="text-grey-9 text-weight-bold"
+            :style="{ fontSize: headerFontSize }"
+          >
+            {{ title }}
+          </div>
         </div>
+        
         <q-space />
         <slot name="header" />
         <q-btn
@@ -125,7 +138,7 @@ const styleContent = computed(() => {
       <q-card-section
         :style="styleContent"
       >
-        <div style="width: 88vw;">
+        <div>
           <slot />
         </div>
         <q-resize-observer @resize="onResizeContent" />
